@@ -16,7 +16,10 @@ Full playbook lives in [find-targets.md](find-targets.md). Track every lead in
       arrives. ✓ Tested — email received.
 - [x] Replace `[your-vercel-url]` in [linkedin-posts.md](linkedin-posts.md) Post 3 with
       the real URL.
-- [ ] Update your LinkedIn headline + featured link to point at the studio site.
+- [x] Update your **personal** LinkedIn profile (Raymund) — headline + featured link
+      pointing at the studio site. (This is your existing profile, not a new page.)
+  - [ ] *Optional:* create a free Forgeline **Company Page** — nice-to-have, ~10 min,
+        don't let it block outreach.
 - [ ] Record ONE teardown Loom on a real site (even a friend's) so the offer is proven
       and you have a sample to show. Keep it to 2 min, 3 fixes.
 

@@ -1,0 +1,17 @@
+{
+  "name": "forgeline-site-audit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Automated website teardown audits — feeds the free-teardown outreach workflow.",
+  "bin": {
+    "site-audit": "./audit.mjs"
+  },
+  "scripts": {
+    "audit": "node audit.mjs",
+    "postinstall": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}
