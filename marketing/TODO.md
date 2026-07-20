@@ -11,12 +11,10 @@ Full playbook lives in [find-targets.md](find-targets.md). Track every lead in
 
 ## ⚡ Today (~2 hrs) — get the machine ready
 
-- [ ] Confirm the live site is up and grab the real URL (the `real-estate-flame-two`
-      link in the site is a *portfolio* project, not the studio site — find the actual
-      Forgeline Vercel URL / domain).
-- [ ] Send yourself a test through the contact form → confirm the Formspree email
-      arrives. A broken form = every lead lost silently.
-- [ ] Replace `[your-vercel-url]` in [linkedin-posts.md](linkedin-posts.md) Post 3 with
+- [x] Confirm the live site is up and grab the real URL → **https://forgelinetechnologies.vercel.app/**
+- [x] Send yourself a test through the contact form → confirm the Formspree email
+      arrives. ✓ Tested — email received.
+- [x] Replace `[your-vercel-url]` in [linkedin-posts.md](linkedin-posts.md) Post 3 with
       the real URL.
 - [ ] Update your LinkedIn headline + featured link to point at the studio site.
 - [ ] Record ONE teardown Loom on a real site (even a friend's) so the offer is proven

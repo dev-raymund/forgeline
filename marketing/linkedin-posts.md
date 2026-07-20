@@ -65,6 +65,6 @@ If your site is slow, outdated, or just not pulling its weight — send me your 
 
 Comment "teardown" or DM me your link, and I'll send yours this week.
 
-🔗 [your-vercel-url]
+🔗 https://forgelinetechnologies.vercel.app/
 
 #freelancedeveloper #webdevelopment #shopify #wordpress
