@@ -35,7 +35,14 @@ const sevIcon = { high: "🔴", med: "🟠", low: "🟡" };
 
 async function main() {
   await mkdir(outDir, { recursive: true });
-  const browser = await chromium.launch();
+  // Use the system-installed Google Chrome (channel: "chrome") so we don't need to
+  // download Playwright's bundled Chromium. Falls back to bundled if Chrome is absent.
+  let browser;
+  try {
+    browser = await chromium.launch({ channel: "chrome" });
+  } catch {
+    browser = await chromium.launch();
+  }
 
   // ---------- DESKTOP PASS ----------
   const desktop = await browser.newContext({
