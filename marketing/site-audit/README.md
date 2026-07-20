@@ -4,14 +4,19 @@ Automated website **teardown** tool. Point it at any URL and it produces a markd
 report with your **3 quick wins** plus desktop + mobile screenshots — the exact ammo you
 need to record a free-teardown Loom in 2 minutes (see item 5 in [../TODO.md](../TODO.md)).
 
-Free & open-source (Playwright). No API keys, no accounts.
+Free & open-source (Playwright). No API keys, no accounts. Uses your existing
+Google Chrome — no big browser download.
 
 ## One-time setup
 
 ```bash
 cd marketing/site-audit
-npm install          # installs Playwright + downloads a headless Chromium (~one-time)
+npm install          # installs the Playwright library only (small, fast)
 ```
+
+Requires Google Chrome installed (the tool launches it via `channel: "chrome"`).
+If Chrome isn't present, it falls back to Playwright's bundled Chromium — run
+`npx playwright install chromium` once to fetch that.
 
 ## Run an audit
 
