@@ -61,7 +61,7 @@ What I build:
 → Shopify & e-commerce stores
 → Custom web apps when a template isn't enough
 
-If your site is slow, outdated, or just not pulling its weight — send me your URL and I'll make you a free 2-minute video with 3 things I'd fix. No pitch, no obligation.
+If your site is slow, outdated, or just not pulling its weight — send me your URL and I'll send back a free written teardown: 3 specific things I'd fix, with screenshots. No pitch, no obligation.
 
 Comment "teardown" or DM me your link, and I'll send yours this week.
 

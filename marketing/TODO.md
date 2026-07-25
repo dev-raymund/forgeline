@@ -20,8 +20,9 @@ Full playbook lives in [find-targets.md](find-targets.md). Track every lead in
       pointing at the studio site. (This is your existing profile, not a new page.)
   - [ ] *Optional:* create a free Forgeline **Company Page** — nice-to-have, ~10 min,
         don't let it block outreach.
-- [ ] Record ONE teardown Loom on a real site (even a friend's) so the offer is proven
-      and you have a sample to show. Keep it to 2 min, 3 fixes.
+- [x] Generate ONE teardown so the offer is proven + you have a sample. Tool built:
+      `cd marketing/site-audit && node audit.mjs <url>` → sends a written HTML/PDF
+      teardown. No video needed. (Sample done: Space Jam.)
 
 ## 🔥 This week — fastest paths to a "yes"
 
@@ -64,7 +65,7 @@ Full playbook lives in [find-targets.md](find-targets.md). Track every lead in
 
 ## 🎯 When someone replies → convert
 
-- [ ] Deliver the free teardown Loom within 24 hrs (3 concrete wins, no hard pitch).
+- [ ] Deliver the free teardown (HTML/PDF from the audit tool) within 24 hrs — 3 concrete wins, no hard pitch.
 - [ ] End with a soft CTA: "Want me to fix these? I can scope it — 15 min call?"
 - [ ] Book the call → send a simple written proposal (scope, price, timeline).
 - [ ] Move status through: `Replied` → `Call booked` → `Proposal sent` → `Won`.
