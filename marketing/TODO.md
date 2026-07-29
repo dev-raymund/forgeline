@@ -4,7 +4,9 @@ Goal: **book 1 paid project ASAP.** The fastest paths are warm network, Upwork/C
 (warm inbound leads), and the free "teardown" hook. Everything here is ordered by
 speed-to-close, not by effort. Do the top block today.
 
-Full playbook lives in [find-targets.md](find-targets.md). Track every lead in
+**Step-by-step to land a client:** [teardown-playbook.md](teardown-playbook.md) — target →
+audit → personalize → send → follow up → convert (with message templates).
+Where to find targets: [find-targets.md](find-targets.md). Track every lead in
 [outreach-tracker.csv](outreach-tracker.csv). Post copy is in [linkedin-posts.md](linkedin-posts.md).
 
 ---
