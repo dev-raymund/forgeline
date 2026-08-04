@@ -1,7 +1,7 @@
 # LinkedIn profile copy — item 4
 
 Copy for your **personal** LinkedIn profile (Raymund). Paste as plain text — LinkedIn
-keeps line breaks; arrows/emoji paste fine. Site: https://forgelinetechnologies.vercel.app/
+keeps line breaks; arrows/emoji paste fine. Site: https://forgelinetechnologies.com/
 
 ---
 
@@ -36,7 +36,7 @@ When you work with Forgeline, you work directly with me — never a junior, neve
 Free website teardown: if your site is slow, outdated, or just not pulling its weight, send me your URL and I'll reply with a free 2-minute video showing 3 specific things I'd fix. No pitch, no obligation.
 
 📩 raymundhermoso.dev@gmail.com
-🔗 https://forgelinetechnologies.vercel.app/
+🔗 https://forgelinetechnologies.com/
 
 ---
 
@@ -44,4 +44,4 @@ Free website teardown: if your site is slow, outdated, or just not pulling its w
 
 - Title: Forgeline Technologies — Web Design & Development Studio
 - Description: Fast websites, Shopify stores & custom web apps for small businesses and founders.
-- URL: https://forgelinetechnologies.vercel.app/
+- URL: https://forgelinetechnologies.com/

@@ -15,7 +15,7 @@ import path from "node:path";
 const SENDER_NAME = "Raymund Hermoso";
 const SENDER_TITLE = "Forgeline Technologies";
 const CONTACT_EMAIL = "raymundhermoso.dev@gmail.com";
-const SITE_URL = "https://forgelinetechnologies.vercel.app/";
+const SITE_URL = "https://forgelinetechnologies.com/";
 
 // ---------- args ----------
 const rawUrl = process.argv[2];

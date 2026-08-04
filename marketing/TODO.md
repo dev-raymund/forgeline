@@ -13,7 +13,7 @@ Where to find targets: [find-targets.md](find-targets.md). Track every lead in
 
 ## ⚡ Today (~2 hrs) — get the machine ready
 
-- [x] Confirm the live site is up and grab the real URL → **https://forgelinetechnologies.vercel.app/**
+- [x] Confirm the live site is up and grab the real URL → **https://forgelinetechnologies.com/** (custom domain live; was vercel.app)
 - [x] Send yourself a test through the contact form → confirm the Formspree email
       arrives. ✓ Tested — email received.
 - [x] Replace `[your-vercel-url]` in [linkedin-posts.md](linkedin-posts.md) Post 3 with
