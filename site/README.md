@@ -25,6 +25,34 @@ open site/index.html        # macOS
 - Adjust **services + prices** to your level.
 - Set your real **GitHub / LinkedIn / Cal.com** links (search for `your-handle`).
 
+## Testimonials — currently hidden, waiting on real quotes
+
+There's a full testimonials section built in `index.html`, but it ships with the
+`hidden` attribute so **it does not render on the live site**. The three cards in
+it are placeholders, marked as such on purpose — nothing in there is a real
+client quote, and it should never go live as-is.
+
+Preview the design without publishing it:
+
+```
+open "site/index.html?preview=testimonials"
+```
+
+To go live, follow the numbered checklist in the big comment block above
+`<section id="testimonials">`. Short version:
+
+1. Get 3 real quotes **in writing**, with permission to publish name + company.
+2. Per card: drop `is-placeholder`, delete the `<span class="ph-tag">`, swap in the
+   real quote, initials, name and role.
+3. Delete the `<div class="editor-note">` block.
+4. Remove `hidden` from the `<section>` tag.
+5. Uncomment the "Testimonials" link in the nav.
+
+Asking for one: *"Would you mind writing 2–3 sentences on what it was like working
+with me, and what the site did for the business? Happy to draft something for you
+to edit if that's easier."* Offering the draft roughly doubles the reply rate, and
+a quote that names a number beats one that says you were nice to work with.
+
 ## Capture inquiries for free — set up the form (2 minutes)
 
 1. Sign up at **https://formspree.io** (free tier = 50 submissions/month).
