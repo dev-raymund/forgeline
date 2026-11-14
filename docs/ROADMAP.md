@@ -4,7 +4,7 @@ Single-business international store for curated everyday essentials.
 Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 
 **Last updated:** 2026-11-14
-**Working branch:** `phase-1/storefront-foundation` (the latest commit is in the session log and `git log`)
+**Working branches:** `phase-1/storefront-foundation` (current baseline) and `design/shadow-board` (visual redesign, awaiting owner review)
 
 ## Status at a glance
 
@@ -12,6 +12,7 @@ Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 | --- | --- | --- |
 | Foundation (done) | Storefront pages, client cart, typed demo catalog, SEO and indexing switch, visual redesign | Done |
 | A | Finish the visual storefront (editorial photography) | Done |
+| Design pass | "The Shadow Board" redesign on `design/shadow-board` | Built; awaiting owner review before it replaces the baseline |
 | B | Business decisions: market, supplier, products, margins | In progress: items 1–2 delivered for owner review |
 | C | Real catalog | Not started (needs B) |
 | D | Commerce backend (hosted checkout, orders, webhooks, email) | Not started (needs B, C) |
@@ -132,3 +133,4 @@ Merging or pushing to `main` · changing the Vercel production branch or domains
 | 2026-11-14 | Phase A: editorial images | 5 of 7 images inspected, exported and wired in; Gear and Brand rejected and awaiting replacements (`88d1aba`) |
 | 2026-11-14 | Phase A: completion | Gear (crop plus retouch) and Brand (retouch) approved and wired in; all editorial slots filled; Phase A done (`e531d94`) |
 | 2026-11-15 | Phase B: items 1–2 | Market comparison and payment feasibility delivered privately for owner review; decision log created |
+| 2026-11-15 | Design pass | Owner found the design too generic and chose direction B of three mockups. "The Shadow Board" built across the whole storefront on `design/shadow-board`; data, cart, routes and SEO unchanged |

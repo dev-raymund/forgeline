@@ -14,7 +14,7 @@ FORGELINE is a single-business international storefront for curated everyday ess
 - Next.js 16 (App Router, Turbopack, Cache Components, Partial Prefetching)
 - React 19 and TypeScript (strict)
 - Tailwind CSS 4, with design tokens in `app/globals.css`
-- Geist Sans and Geist Mono via `next/font`
+- Archivo (one variable family, with its width axis) via `next/font`
 
 There are no additional runtime dependencies.
 
@@ -57,9 +57,10 @@ app/
 components/
   layout/                 Header, mobile navigation, footer, page frame
   product/                Product card, grid, media, price, details, add to cart
-  collection/             Collection grid
+  home/                   Homepage sections: board hero, brand band, values
+  collection/             Collection grid (photos hung on the board)
   cart/                   Cart link and cart view (Client Components)
-  ui/                     Primitives: button, container, breadcrumbs, badge, …
+  ui/                     Primitives: button, tag, hung photo, media frame, breadcrumbs, …
 lib/
   types.ts                Product, Collection, Variant and Money types
   catalog.ts              The only entry point for catalog data
@@ -67,7 +68,7 @@ lib/
   money.ts, format.ts     Integer money arithmetic and formatting
   cart.ts                 Client cart store (localStorage)
   site.ts, metadata.ts    Brand configuration and page metadata helper
-assets/fonts/             Geist TTFs for the sharing image only (SIL OFL)
+assets/fonts/             Geist TTFs for the sharing image only (SIL OFL; predates the Archivo redesign)
 scripts/                  generate-favicon.mjs
 ```
 
@@ -80,22 +81,28 @@ scripts/                  generate-favicon.mjs
 - **Caching.** Catalog routes are prerendered with `generateStaticParams`, and product and collection pages set `ensureStatic = "navigation"`. Catalog reads do not use `"use cache"` because the data is in memory. Add caching in `lib/catalog.ts` when a remote source arrives (see the comment there). Keep cookie- or request-dependent code out of cached scopes.
 - **Static output.** Every page is fully static, with no scheduled regeneration. The footer year is inlined at build time from `next.config.ts` (`FORGELINE_BUILD_YEAR`), so it updates on the next deploy.
 - **SEO.** Pages use `pageMetadata()` from `lib/metadata.ts` for the canonical URL, Open Graph tags, sharing image and robots directives. Never set `robots` directly in page metadata. Indexing is controlled by one switch; see [Search engine indexing](#search-engine-indexing).
-- **Styling.** Use the tokens in `app/globals.css` (`text-muted`, `border-line`, `max-w-content`, `px-gutter`, `py-section`, …). The default Tailwind palette is disabled. The site is light-only.
+- **Design: the shadow board.** The store borrows from a workshop shadow board, where every item has an outlined place.
+  - **Board:** `bg-board` is the stone-grey pegboard. The header, the homepage hero, collection headers and the About header sit on it. Only charcoal text passes contrast there, so never use `text-muted`, white or orange text on the board.
+  - **Hung photos and tags:** photos on the board use `HungPhoto` (white frame) with a `Tag` (label with an eyelet). Tags are also the collection filters.
+  - **Outlines:** a dashed outline marks anything that is not there yet, such as a product photo waiting on a sample. `MediaFrame` renders it automatically when there is no image.
+  - **Type:** Archivo only. Width is the variable: `font-wide` for headlines, `font-wider` for the wordmark, `font-narrow` for tags. Headings are sentence case; there are no all-caps labels or monospace text.
+  - **Orange:** reserved for the add-to-cart button, the cart count and the active tag eyelet.
+- **Styling.** Use the tokens in `app/globals.css` (`text-muted`, `border-line`, `border-outline`, `max-w-content`, `px-gutter`, `py-section`, …). The default Tailwind palette is disabled. The site is light-only.
 
 ## Photography
 
-Every image slot uses `next/image` with a fixed aspect ratio. Until a photo is added, a branded placeholder renders in its place, so adding photos never shifts the layout. Store images locally under `public/images/` as optimized JPEGs (quality around 80); `next/image` serves AVIF or WebP at the right size.
+Every image slot uses `next/image` with a fixed aspect ratio. Until a photo is added, a dashed outline of the same size renders in its place, so adding photos never shifts the layout. Store images locally under `public/images/` as optimized JPEGs (quality around 80); `next/image` serves AVIF or WebP at the right size.
 
 | Slot | File | Wire it in | Ratio and current size |
 | --- | --- | --- | --- |
-| Hero | `public/images/hero/forgeline-hero.webp` | `heroImage` in `lib/media.ts` | 2:1, 1440×720. Shown at 2:1 on desktop, 16:10 on tablet and 4:3 on phones (focal points set in `components/home/hero.tsx`) |
-| Collections | `public/images/collections/{slug}.webp` | `image` on each collection in `lib/data/demo-catalog.ts`, with a `position` focal point | 4:5, 920×1150 (Gear 616×770). Cards always show 4:5; the collection page header crops to 4:3 on phones |
-| Brand section | `public/images/brand/forgeline-editorial.webp` | `brandImage` in `lib/media.ts` | 4:3, 1192×894 |
+| Bench line-up | `public/images/hero/forgeline-hero.webp` | `heroImage` in `lib/media.ts` | 2:1, 1440×720. Hung on the homepage's second board (`components/home/brand-statement.tsx`); phones crop to 3:2 |
+| Collections | `public/images/collections/{slug}.webp` | `image` on each collection in `lib/data/demo-catalog.ts`, with a `position` focal point | 4:5, 920×1150 (Gear 616×770). Hung on the homepage hero board and the collections page; the collection page header crops to 4:3 on phones |
+| Loft corner | `public/images/brand/forgeline-editorial.webp` | `brandImage` in `lib/media.ts` | 4:3, 1192×894. Hung on the About page's board |
 | Products | `public/images/products/…` | `images` on each product in the catalog | 4:5. Must be real photos of the exact variant (Phase C) |
 
-Export images by cropping to the exact ratio at native resolution (never upscale) and converting to WebP at quality 80–82 with metadata stripped. `sharp` ships with Next.js, so no extra dependency is needed. Only the homepage hero uses `preload`; every other image lazy-loads. Don't add `loading="eager"`: React 19 turns any non-lazy server-rendered image into a preload.
+Export images by cropping to the exact ratio at native resolution (never upscale) and converting to WebP at quality 80–82 with metadata stripped. `sharp` ships with Next.js, so no extra dependency is needed. No image is preloaded at present, because the homepage's largest element is its headline; every image lazy-loads. Use `preload` only for a page's single largest above-the-fold image, such as the main product photo. Don't add `loading="eager"`: React 19 turns any non-lazy server-rendered image into a preload.
 
-**Status:** all editorial slots are filled: the hero, the five collections and the brand section. Gear is a 616×770 crop that removes an off-palette apparel item, with a small stitched label retouched out. Brand had a logo-like leather patch retouched out. Product images remain placeholders until Phase C.
+**Status:** all editorial slots are filled: the bench line-up, the five collections and the loft corner. Gear is a 616×770 crop that removes an off-palette apparel item, with a small stitched label retouched out. Brand had a logo-like leather patch retouched out. Product images remain dashed outlines until Phase C.
 
 Art direction: one studio set with a warm cream seamless backdrop, soft daylight from one side and gentle shadows. No text, logos or people. Every image needs descriptive `alt` text, and photos must match the product descriptions.
 

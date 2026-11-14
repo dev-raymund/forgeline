@@ -16,7 +16,7 @@ export default async function CartPage() {
 
   return (
     <Container className="pb-section">
-      <PageHeader eyebrow="Cart" title="Your cart" />
+      <PageHeader title="Your cart" />
       <CartView catalog={catalog} />
     </Container>
   );

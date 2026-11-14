@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Arrow } from "@/components/ui/button";
+import { Tag } from "@/components/ui/tag";
 import type { Product } from "@/lib/types";
 import { ProductMedia } from "./product-media";
 import { ProductPrice } from "./product-price";
@@ -26,36 +26,25 @@ export function ProductCard({
           name={product.name}
           sizes={productGridSizes}
           decorative
-          zoomOnHover
-          className="rounded-sm"
+          className="transition-colors group-hover:border-foreground"
         />
+        {/* Clipped to the bottom edge, like the tags on the board. */}
         {product.isDemo && (
-          <span className="absolute left-2.5 top-2.5 rounded-sm bg-background/92 px-2 py-1 font-mono text-eyebrow uppercase text-foreground">
-            Demo
-          </span>
+          <div className="absolute -bottom-[1.0625rem] left-3">
+            <Tag>Demo</Tag>
+          </div>
         )}
       </div>
-      <div className="mt-3.5 flex flex-1 flex-col">
-        <p className="font-mono text-eyebrow uppercase text-muted">
-          {collectionName}
-        </p>
-        <h3 className="mt-1.5 text-[0.9375rem] font-semibold leading-snug">
-          <Link
-            href={`/products/${product.slug}`}
-            className="after:absolute after:inset-0 after:content-['']"
-          >
-            {product.name}
-          </Link>
-        </h3>
-        <ProductPrice price={product.price} className="mt-1 text-sm" />
-        <span
-          aria-hidden="true"
-          className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[0.6875rem] font-semibold uppercase tracking-label text-foreground"
+      <h3 className="mt-7 text-[1.0625rem] font-bold leading-snug">
+        <Link
+          href={`/products/${product.slug}`}
+          className="underline-offset-4 after:absolute after:inset-0 after:content-[''] group-hover:underline"
         >
-          View details
-          <Arrow className="size-3 transition-transform group-hover:translate-x-0.5 group-hover:text-accent-ink" />
-        </span>
-      </div>
+          {product.name}
+        </Link>
+      </h3>
+      <p className="mt-0.5 text-[0.9375rem] text-muted">{collectionName}</p>
+      <ProductPrice price={product.price} className="text-[0.9375rem]" />
     </article>
   );
 }

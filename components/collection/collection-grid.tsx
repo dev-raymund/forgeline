@@ -1,92 +1,49 @@
 import Link from "next/link";
-import { Arrow } from "@/components/ui/button";
-import { MediaFrame } from "@/components/ui/media-frame";
+import { HungPhoto } from "@/components/ui/hung-photo";
+import { Tag } from "@/components/ui/tag";
 import { getCollections, getProductCounts } from "@/lib/catalog";
-import { cn } from "@/lib/cn";
 import { formatCount } from "@/lib/format";
 
 /**
- * Responsive layout for the five collections. Images stay 4:5 everywhere
- * (matching the photography); wide slots switch the card to a side-by-side
- * layout instead of cropping the image:
- * - mobile: 2 columns; card 5 spans both columns, side by side
- * - tablet: 3 cards in a row, then cards 4 and 5 side by side
- * - desktop: 5 equal portrait cards
+ * The five collections as photos hung on the board, each with its tag and a
+ * one-line summary. Render it inside a `bg-board` section: the summary text
+ * is charcoal because muted text does not pass contrast on the board.
  */
-const MOBILE_ROW = "max-md:grid max-md:grid-cols-2 max-md:items-center max-md:gap-4";
-const TABLET_ROW = "md:max-lg:grid md:max-lg:grid-cols-2 md:max-lg:items-center md:max-lg:gap-5";
-
-const layout = [
-  { item: "md:col-span-2", row: "", sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw" },
-  { item: "md:col-span-2", row: "", sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw" },
-  { item: "md:col-span-2", row: "", sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw" },
-  { item: "md:col-span-3", row: TABLET_ROW, sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 25vw, 50vw" },
-  { item: "col-span-2 md:col-span-3", row: cn(MOBILE_ROW, TABLET_ROW), sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 25vw, 50vw" },
-] as const;
-
-export async function CollectionGrid({
-  headingLevel = "h3",
-}: {
-  headingLevel?: "h2" | "h3";
-}) {
+export async function CollectionGrid() {
   const [collections, counts] = await Promise.all([
     getCollections(),
     getProductCounts(),
   ]);
-  const Heading = headingLevel;
 
   return (
     <ul
       role="list"
-      className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 md:grid-cols-6 md:gap-y-10 lg:grid-cols-5"
+      className="grid grid-cols-2 gap-x-3.5 gap-y-10 md:grid-cols-3 md:gap-x-6 lg:grid-cols-5"
     >
-      {collections.map((collection, index) => {
-        const slot = layout[index % layout.length];
-        const sideBySide = slot.row !== "";
-        return (
-          <li key={collection.slug} className={cn("lg:col-span-1", slot.item)}>
-            <Link
-              href={`/collections/${collection.slug}`}
-              className={cn("group block", slot.row)}
-            >
-              <div className="relative">
-                <MediaFrame
-                  image={collection.image}
-                  alt=""
-                  decorative
-                  sizes={slot.sizes}
-                  zoomOnHover
-                  className="aspect-[4/5] rounded-sm"
-                />
-                <span className="absolute left-2.5 top-2.5 rounded-sm bg-background/92 px-2 py-1 font-mono text-eyebrow text-foreground">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <div
-                className={cn(
-                  "mt-3.5",
-                  sideBySide &&
-                    (index === 4 ? "max-md:mt-0 md:max-lg:mt-0" : "md:max-lg:mt-0"),
-                )}
-              >
-                <div className="flex items-baseline justify-between gap-3">
-                  <Heading className="text-lg font-bold uppercase tracking-tight sm:text-xl">
-                    {collection.name}
-                  </Heading>
-                  <span className="font-mono text-eyebrow uppercase text-muted">
+      {collections.map((collection) => (
+        <li key={collection.slug}>
+          <Link href={`/collections/${collection.slug}`} className="group block">
+            <HungPhoto
+              image={collection.image}
+              alt=""
+              decorative
+              sizes="(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw"
+              className="aspect-[4/5]"
+              tag={
+                <Tag>
+                  {collection.name}
+                  <span className="font-normal max-[359px]:hidden">
                     {formatCount(counts[collection.slug], "item")}
                   </span>
-                </div>
-                <p className="mt-1.5 text-sm text-muted">{collection.summary}</p>
-                <span className="mt-3 inline-flex items-center gap-2 border-b border-foreground pb-0.5 text-[0.6875rem] font-semibold uppercase tracking-label">
-                  Discover
-                  <Arrow className="size-3 transition-transform group-hover:translate-x-0.5 group-hover:text-accent-ink" />
-                </span>
-              </div>
-            </Link>
-          </li>
-        );
-      })}
+                </Tag>
+              }
+            />
+            <p className="mt-7 text-[0.9375rem] leading-snug underline-offset-4 group-hover:underline">
+              {collection.summary}
+            </p>
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 }

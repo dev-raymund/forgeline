@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/eyebrow";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -12,12 +11,18 @@ export default function NotFound() {
   return (
     <SiteChrome>
       <Container className="flex flex-1 flex-col justify-center py-section">
-        <Eyebrow className="mb-6">Error 404</Eyebrow>
-        <h1 className="text-headline font-semibold">Page not found</h1>
-        <p className="mt-5 max-w-prose text-base text-muted md:text-lg">
-          The page you are looking for does not exist or may have moved.
+        <div
+          aria-hidden="true"
+          className="mb-8 flex h-28 w-36 items-center justify-center border-2 border-dashed border-outline text-sm text-muted"
+        >
+          Nothing here
+        </div>
+        <h1 className="text-headline font-extrabold font-wide">Page not found</h1>
+        <p className="mt-4 max-w-prose text-lg text-muted">
+          The page you are looking for does not exist or may have moved
+          (error 404).
         </p>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <ButtonLink href="/shop">Shop all essentials</ButtonLink>
           <ButtonLink href="/" variant="secondary">
             Back to home

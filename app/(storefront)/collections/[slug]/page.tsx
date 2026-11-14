@@ -5,9 +5,9 @@ import { Suspense } from "react";
 import { ProductGrid } from "@/components/product/product-grid";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/eyebrow";
-import { MediaFrame } from "@/components/ui/media-frame";
+import { HungPhoto } from "@/components/ui/hung-photo";
 import { ProductGridSkeleton, Skeleton } from "@/components/ui/skeleton";
+import { Tag } from "@/components/ui/tag";
 import {
   getCollection,
   getCollections,
@@ -50,13 +50,14 @@ export default function CollectionPage({
   params,
 }: PageProps<"/collections/[slug]">) {
   return (
-    <Container className="pb-section">
-      <Suspense fallback={<CollectionSkeleton />}>
-        <CollectionContent params={params} />
-      </Suspense>
-    </Container>
+    <Suspense fallback={<CollectionSkeleton />}>
+      <CollectionContent params={params} />
+    </Suspense>
   );
 }
+
+const bandGrid =
+  "grid gap-8 pb-14 pt-5 md:grid-cols-12 md:items-center md:gap-10 lg:pb-21 lg:pt-7";
 
 async function CollectionContent({
   params,
@@ -74,81 +75,94 @@ async function CollectionContent({
 
   return (
     <>
-      <div className="pt-6 md:pt-8">
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Collections", href: "/collections" },
-            { label: collection.name },
-          ]}
-        />
-      </div>
-      <header className="grid gap-6 border-b border-line pb-8 pt-6 md:grid-cols-12 md:items-center md:gap-10 md:pb-12 md:pt-8">
-        <div className="md:col-span-7 lg:col-span-6">
-          <Eyebrow className="mb-4">{collection.summary}</Eyebrow>
-          <h1 className="text-display font-bold uppercase">{collection.name}</h1>
-          <p className="mt-5 max-w-prose text-base text-muted md:text-lg">
-            {collection.description}
-          </p>
-        </div>
-        {/* 4:5 photography; phones crop to 4:3 around the image's focal point. */}
-        <MediaFrame
-          image={collection.image}
-          alt={`${collection.name} collection`}
-          sizes="(min-width: 90rem) 440px, (min-width: 64rem) 33vw, (min-width: 48rem) 40vw, 100vw"
-          className="aspect-[4/3] rounded-sm md:col-span-5 md:aspect-[4/5] lg:col-span-4 lg:col-start-9"
-        />
-      </header>
-      <h2 className="py-6 font-mono text-eyebrow uppercase text-muted">
-        {formatCount(products.length, "product")}
-      </h2>
-      <ProductGrid products={products} />
+      {/* The collection's own stretch of board, continuing from the header. */}
+      <section aria-labelledby="collection-title" className="bg-board">
+        <Container className={bandGrid}>
+          <div className="md:col-span-7">
+            <Breadcrumbs
+              tone="board"
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Collections", href: "/collections" },
+                { label: collection.name },
+              ]}
+            />
+            <h1
+              id="collection-title"
+              className="mt-6 text-display font-extrabold font-wide lg:mt-9"
+            >
+              {collection.name}
+            </h1>
+            <p className="mt-4 max-w-[40ch] text-lg lg:text-xl">
+              {collection.description}
+            </p>
+          </div>
+          {/* 4:5 photography; phones crop to 4:3 around the image's focal point. */}
+          <HungPhoto
+            image={collection.image}
+            alt={`${collection.name} collection`}
+            sizes="(min-width: 90rem) 440px, (min-width: 64rem) 33vw, (min-width: 48rem) 40vw, 100vw"
+            className="aspect-[4/3] md:col-span-5 md:aspect-[4/5] lg:col-span-4 lg:col-start-9"
+            tag={<Tag>{collection.summary}</Tag>}
+          />
+        </Container>
+      </section>
 
-      <nav
-        aria-labelledby="other-collections"
-        className="mt-section border-t border-line pt-8"
-      >
-        <h2
-          id="other-collections"
-          className="flex items-center gap-2.5 font-mono text-eyebrow uppercase text-muted"
-        >
-          <span aria-hidden="true" className="size-1.5 bg-accent" />
-          Other collections
+      <Container className="pb-section">
+        <h2 className="pb-7 pt-8 font-semibold">
+          {formatCount(products.length, "product")}
         </h2>
-        <ul className="mt-5 flex flex-wrap gap-2">
-          {others.map((other) => (
-            <li key={other.slug}>
-              <Link
-                href={`/collections/${other.slug}`}
-                className="inline-flex h-11 items-center gap-2 rounded-sm border border-line-strong px-4 text-xs font-semibold uppercase tracking-label transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
-              >
-                {other.name}
-                <span aria-hidden="true">→</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        <ProductGrid products={products} />
+
+        <nav
+          aria-labelledby="other-collections"
+          className="mt-section border-t border-line pt-8"
+        >
+          <h2 id="other-collections" className="text-lg font-bold">
+            Other collections
+          </h2>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {others.map((other) => (
+              <li key={other.slug}>
+                <Link
+                  href={`/collections/${other.slug}`}
+                  className="group inline-block"
+                >
+                  <Tag size="md" className="transition-colors group-hover:bg-cream">
+                    {other.name}
+                  </Tag>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </Container>
     </>
   );
 }
 
 function CollectionSkeleton() {
+  const block = "rounded-sm bg-charcoal/10";
   return (
-    <div>
-      <Skeleton className="mt-6 h-4 w-48 md:mt-8" />
-      <div className="grid gap-6 border-b border-line pb-8 pt-6 md:grid-cols-12 md:items-center md:gap-10 md:pb-12 md:pt-8">
-        <div className="space-y-4 md:col-span-7 lg:col-span-6">
-          <Skeleton className="h-3 w-40" />
-          <Skeleton className="h-14 w-56" />
-          <Skeleton className="h-5 w-full max-w-prose" />
+    <>
+      <div className="bg-board" role="status" aria-label="Loading collection">
+        <Container className={bandGrid}>
+          <div className="space-y-5 md:col-span-7">
+            <div className={`${block} h-4 w-48`} />
+            <div className={`${block} h-16 w-64`} />
+            <div className={`${block} h-6 w-full max-w-md`} />
+          </div>
+          <div
+            className={`${block} aspect-[4/3] md:col-span-5 md:aspect-[4/5] lg:col-span-4 lg:col-start-9`}
+          />
+        </Container>
+      </div>
+      <Container className="pb-section">
+        <div className="pb-7 pt-8">
+          <Skeleton className="h-5 w-24" />
         </div>
-        <Skeleton className="aspect-[4/3] md:col-span-5 md:aspect-[4/5] lg:col-span-4 lg:col-start-9" />
-      </div>
-      <div className="py-6">
-        <Skeleton className="h-4 w-24" />
-      </div>
-      <ProductGridSkeleton />
-    </div>
+        <ProductGridSkeleton />
+      </Container>
+    </>
   );
 }

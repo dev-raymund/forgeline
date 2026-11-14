@@ -18,7 +18,7 @@ import { multiplyMoney, sumMoney } from "@/lib/money";
 import type { CartCatalogEntry, Money } from "@/lib/types";
 
 const stepperButton =
-  "h-full w-10 text-lg transition-colors hover:bg-surface disabled:text-line-strong disabled:hover:bg-transparent";
+  "h-full w-11 text-lg transition-colors hover:bg-cream disabled:text-stone disabled:hover:bg-transparent";
 
 export function CartView({
   catalog,
@@ -62,7 +62,7 @@ export function CartView({
     content = (
       <div className="py-16 text-center md:py-24">
         <p className="text-lg font-medium">Your cart is empty.</p>
-        <p className="mt-2 text-sm text-muted">
+        <p className="mt-2 text-muted">
           Browse the collections to find something useful.
         </p>
         <ButtonLink href="/shop" className="mt-8">
@@ -81,12 +81,12 @@ export function CartView({
       : undefined;
 
     content = (
-      <div className="grid gap-12 py-10 lg:grid-cols-12 lg:gap-16">
+      <div className="grid gap-12 pb-10 lg:grid-cols-12 lg:gap-16">
         <section aria-labelledby="cart-items" className="lg:col-span-8">
           <h2 id="cart-items" className="sr-only">
             Items in your cart
           </h2>
-          <ul role="list" className="divide-y divide-line border-y border-line">
+          <ul role="list" className="divide-y divide-line border-b border-line">
             {items.map(({ line, product, variant, unitPrice }) => {
               const label = variant
                 ? `${product.name}, ${variant.name}`
@@ -106,28 +106,29 @@ export function CartView({
                       image={product.image}
                       name={product.name}
                       sizes="112px"
+                      note=""
                       decorative
                     />
                   </Link>
                   <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row sm:justify-between">
                     <div className="min-w-0">
-                      <p className="font-mono text-eyebrow uppercase text-muted">
+                      <p className="text-sm text-muted">
                         {product.collectionName}
                       </p>
                       <Link
                         href={`/products/${product.slug}`}
-                        className="mt-1 block text-sm font-medium underline-offset-4 hover:underline"
+                        className="mt-0.5 block text-[1.0625rem] font-bold leading-snug underline-offset-4 hover:underline"
                       >
                         {product.name}
                       </Link>
                       {variant && (
-                        <p className="mt-1 text-sm text-muted">{variant.name}</p>
+                        <p className="mt-1 text-[0.9375rem] text-muted">{variant.name}</p>
                       )}
-                      <ProductPrice price={unitPrice} className="mt-1 text-sm" />
+                      <ProductPrice price={unitPrice} className="mt-1 text-[0.9375rem]" />
                     </div>
 
                     <div className="flex items-center gap-4 sm:flex-col sm:items-end sm:justify-between">
-                      <div className="inline-flex h-10 items-center rounded-md border border-line-strong">
+                      <div className="inline-flex h-11 items-center rounded-md border-[1.5px] border-foreground">
                         <button
                           type="button"
                           aria-label={`Decrease quantity of ${label}`}
@@ -141,7 +142,7 @@ export function CartView({
                         </button>
                         <output
                           aria-label={`Quantity of ${label}`}
-                          className="w-8 text-center text-sm tabular-nums"
+                          className="w-8 text-center font-semibold tabular-nums"
                         >
                           {line.quantity}
                         </output>
@@ -160,7 +161,7 @@ export function CartView({
                       <button
                         type="button"
                         onClick={() => remove(line.productId, line.variantId, label)}
-                        className="py-2 text-sm text-muted underline underline-offset-4 transition-colors hover:text-foreground"
+                        className="py-2 text-[0.9375rem] font-medium underline underline-offset-4 hover:decoration-2"
                       >
                         Remove<span className="sr-only"> {label}</span>
                       </button>
@@ -173,11 +174,11 @@ export function CartView({
         </section>
 
         <aside aria-labelledby="cart-summary" className="lg:col-span-4">
-          <div className="rounded-md border border-line p-6 lg:sticky lg:top-24">
-            <h2 id="cart-summary" className="text-sm font-medium">
+          <div className="border-[1.5px] border-foreground p-6 lg:sticky lg:top-28">
+            <h2 id="cart-summary" className="text-lg font-bold">
               Summary
             </h2>
-            <dl className="mt-4 divide-y divide-line text-sm">
+            <dl className="mt-3 divide-y divide-line">
               <div className="flex justify-between py-3">
                 <dt className="text-muted">Items</dt>
                 <dd className="tabular-nums">{formatCount(itemCount, "item")}</dd>
@@ -193,7 +194,7 @@ export function CartView({
                 </dd>
               </div>
             </dl>
-            <p className="mt-6 rounded-md bg-surface p-4 text-xs leading-relaxed text-muted">
+            <p className="mt-5 border-2 border-dashed border-outline p-4 text-sm leading-relaxed text-muted">
               Checkout is not available during the preview. Your cart is saved
               in this browser only.
             </p>

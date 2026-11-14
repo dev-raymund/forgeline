@@ -27,7 +27,7 @@ export function AddToCart({
     <div className="space-y-6">
       {variants.length > 0 && (
         <fieldset>
-          <legend className="text-sm font-medium">
+          <legend className="font-semibold">
             {optionLabel || "Option"}
             {selected && (
               <span className="font-normal text-muted">: {selected.name}</span>
@@ -47,7 +47,7 @@ export function AddToCart({
                   }}
                   className="peer sr-only"
                 />
-                <span className="inline-flex h-10 min-w-12 items-center justify-center rounded-md border border-line-strong px-4 text-sm transition-colors hover:border-foreground peer-checked:border-foreground peer-checked:bg-foreground peer-checked:text-background peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-foreground">
+                <span className="inline-flex h-11 min-w-12 items-center justify-center rounded-md border-[1.5px] border-foreground px-4 font-medium transition-colors hover:bg-cream peer-checked:bg-foreground peer-checked:text-on-inverse peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-foreground">
                   {variant.name}
                 </span>
               </label>
@@ -59,6 +59,7 @@ export function AddToCart({
       <div>
         <Button
           size="lg"
+          variant="accent"
           className="w-full sm:w-auto sm:min-w-64"
           onClick={() => {
             addToCart(productId, variantId);
@@ -67,7 +68,7 @@ export function AddToCart({
         >
           Add to cart
         </Button>
-        <p role="status" className="mt-3 min-h-5 text-sm text-muted">
+        <p role="status" className="mt-3 min-h-6 text-[0.9375rem] text-muted">
           {added && (
             <>
               Added to your cart.{" "}

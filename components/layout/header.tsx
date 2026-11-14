@@ -7,9 +7,13 @@ import { getCollections } from "@/lib/catalog";
 import { companyLinks } from "@/lib/site";
 import { MobileNav, type CollectionNavItem } from "./mobile-nav";
 
-const quietLink =
-  "text-[0.8125rem] font-medium text-muted transition-colors hover:text-foreground";
+const navLink = "font-medium underline-offset-4 hover:underline";
 
+/**
+ * The header is the top strip of the board. Its height is a multiple of the
+ * 28px dot grid (56px, then 84px) so a board section directly below it, such
+ * as the homepage hero, continues the pattern without a seam.
+ */
 export async function Header() {
   const collections = await getCollections();
   const items: CollectionNavItem[] = collections.map((collection) => ({
@@ -20,12 +24,12 @@ export async function Header() {
   }));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-background">
-      <Container className="relative flex h-16 items-center gap-4 lg:gap-8">
+    <header className="sticky top-0 z-40 bg-board">
+      <Container className="relative flex h-14 items-center gap-3 sm:gap-6 lg:h-21 lg:gap-10">
         <Link
           href="/"
           aria-label="Forgeline home"
-          className="-my-2 shrink-0 py-2 text-[0.9375rem]"
+          className="-my-2 shrink-0 py-2 text-[1.0625rem] min-[360px]:text-[1.1875rem] lg:text-[1.4375rem]"
         >
           <Wordmark />
         </Link>
@@ -34,18 +38,20 @@ export async function Header() {
           <ul className="flex items-center gap-7">
             {items.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className={quietLink}>
+                <Link href={item.href} className={navLink}>
                   {item.label}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/about" className={navLink}>
+                About
+              </Link>
+            </li>
           </ul>
         </nav>
 
-        <div className="ml-auto flex items-center gap-1.5 sm:gap-3">
-          <Link href="/about" className={`hidden lg:block ${quietLink}`}>
-            About
-          </Link>
+        <div className="ml-auto flex items-center gap-1 sm:gap-4">
           {/* Visibility lives on a wrapper: the button's own display class would win. */}
           <span className="hidden sm:block">
             <ButtonLink href="/shop" size="sm">

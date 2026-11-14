@@ -1,18 +1,23 @@
 @import "tailwindcss";
 
 /*
- * FORGELINE design tokens: Premium Urban Utility
+ * FORGELINE design tokens: The Shadow Board
  * ------------------------------------------------------------------------
+ * The store borrows from a workshop shadow board: a stone-grey pegboard
+ * where every item has an outlined place. Photos hang on the board in white
+ * frames with labelled tags, and a dashed outline marks anything that is not
+ * there yet (for example a product photo that is waiting on a sample).
+ *
  * Tokens are declared with Tailwind CSS v4 `@theme`, which exposes each one
- * as a CSS custom property and generates matching utilities
- * (e.g. --color-muted -> text-muted, --container-content -> max-w-content).
- * The default Tailwind palette and radius scale are reset so components can
- * only use the brand values below. Light theme only.
+ * as a CSS custom property and generates matching utilities. The default
+ * Tailwind palette and radius scale are reset so components can only use the
+ * brand values below. Light theme only.
  *
  * Contrast notes (WCAG 2.2):
- * - charcoal on cream 16.0:1, muted on cream 5.9:1, accent-ink on cream 4.8:1
+ * - charcoal on white 17.9:1, on cream 16.0:1, on the stone board 7.3:1
+ * - muted on white 6.6:1, on cream 5.9:1. Never use muted, white or orange
+ *   text on the board: only charcoal passes there.
  * - charcoal on orange 4.7:1 (accent buttons use charcoal text, never white)
- * - stone is for text on charcoal (7.3:1) and for lines on light surfaces
  */
 
 @theme {
@@ -24,18 +29,16 @@
   --color-orange: #d85b36;
   --color-stone: #a7a69d;
 
-  /* Semantic: light surfaces */
-  --color-background: var(--color-cream);
+  /* Semantic: page */
+  --color-background: var(--color-white);
   --color-foreground: var(--color-charcoal);
-  --color-surface: var(--color-white); /* Raised bands, cards, panels. */
-  --color-sunken: #e8e4da; /* Image wells, placeholders, skeletons. */
-  --color-muted: #5e5c55; /* Secondary text on cream or white. */
-  --color-line: #dcd7cc; /* Default borders and dividers. */
-  --color-line-strong: var(--color-stone); /* Interactive borders. */
+  --color-surface: var(--color-cream); /* Quiet panels and loading states. */
+  --color-muted: #5e5c55; /* Secondary text on white or cream only. */
+  --color-line: #dcd7cc; /* Hairline dividers. */
+  --color-outline: var(--color-stone); /* Dashed "not here yet" outlines. */
 
-  /* Semantic: accent (use sparingly) */
-  --color-accent: var(--color-orange); /* Fills, markers, large text. */
-  --color-accent-ink: #b5462a; /* Small accent text on light surfaces. */
+  /* Semantic: accent. Orange marks the one purchase action and counts. */
+  --color-accent: var(--color-orange);
 
   /* Semantic: inverse (charcoal) surfaces */
   --color-inverse: var(--color-charcoal);
@@ -43,29 +46,24 @@
   --color-on-inverse-muted: var(--color-stone);
   --color-line-inverse: #37362f;
 
-  /* Typography scale additions (Tailwind's text-xs…text-6xl remain) */
-  --text-display: clamp(2.125rem, 0.55rem + 7.6vw, 6.25rem);
-  --text-display--line-height: 0.9;
-  --text-display--letter-spacing: -0.035em;
-  --text-headline: clamp(1.875rem, 1.15rem + 2.9vw, 3.75rem);
-  --text-headline--line-height: 0.95;
-  --text-headline--letter-spacing: -0.03em;
-  --text-title: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
-  --text-title--line-height: 1.1;
-  --text-title--letter-spacing: -0.02em;
-  --text-eyebrow: 0.6875rem;
-  --text-eyebrow--line-height: 1rem;
-  --text-eyebrow--letter-spacing: 0.14em;
-  --tracking-brand: 0.16em;
-  --tracking-label: 0.08em;
+  /* Type scale additions (Tailwind's text-xs…text-6xl remain) */
+  --text-display: clamp(2.5rem, 1.05rem + 4.75vw, 5.25rem);
+  --text-display--line-height: 0.96;
+  --text-display--letter-spacing: -0.025em;
+  --text-headline: clamp(1.875rem, 1.35rem + 2.2vw, 2.875rem);
+  --text-headline--line-height: 1.02;
+  --text-headline--letter-spacing: -0.02em;
+  --text-title: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --text-title--line-height: 1.12;
+  --text-title--letter-spacing: -0.015em;
 
   /* Content width (reading width uses Tailwind's built-in max-w-prose: 65ch) */
   --container-content: 90rem;
 
-  /* Border radius: crisp, industrial */
+  /* Border radius: small and square, like labels and plates */
   --radius-*: initial;
   --radius-sm: 0.125rem;
-  --radius-md: 0.25rem;
+  --radius-md: 0.1875rem;
   --radius-lg: 0.375rem;
   --radius-full: 9999px;
 
@@ -77,12 +75,35 @@
 
 /* Tokens that reference runtime variables (next/font, responsive spacing). */
 @theme inline {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: var(--font-archivo), Arial, ui-sans-serif, system-ui, sans-serif;
 
   /* Spacing: responsive page gutter and vertical section rhythm. */
   --spacing-gutter: var(--layout-gutter);
   --spacing-section: var(--layout-section);
+}
+
+/*
+ * The pegboard surface. The dot grid is 28px, so anything that sits flush
+ * against another board section should be a multiple of 28px tall (the
+ * header is 56px on phones and 84px on desktop).
+ */
+@utility bg-board {
+  background-color: var(--color-stone);
+  background-image: radial-gradient(rgb(23 23 23 / 0.3) 1.5px, transparent 1.7px);
+  background-size: 28px 28px;
+}
+
+/* Archivo is one variable family; width is the main typographic variable. */
+@utility font-narrow {
+  font-stretch: 88%;
+}
+
+@utility font-wide {
+  font-stretch: 112%;
+}
+
+@utility font-wider {
+  font-stretch: 125%;
 }
 
 :root {
@@ -115,7 +136,7 @@
     color-scheme: light;
     -webkit-text-size-adjust: 100%;
     /* Keep in-page targets (e.g. the skip link) clear of the sticky header. */
-    scroll-padding-top: 4rem;
+    scroll-padding-top: 5.5rem;
   }
 
   body {

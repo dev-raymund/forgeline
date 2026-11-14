@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 /** Static placeholder block. Intentionally not animated. */
 export function Skeleton({ className }: { className?: string }) {
   return (
-    <div aria-hidden="true" className={cn("rounded-sm bg-sunken", className)} />
+    <div aria-hidden="true" className={cn("rounded-sm bg-surface", className)} />
   );
 }
 
@@ -30,13 +30,13 @@ export function ProductGridSkeleton({ count = 4 }: { count?: number }) {
     <div
       role="status"
       aria-label="Loading products"
-      className="grid grid-cols-2 gap-x-3 gap-y-9 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4"
+      className="grid grid-cols-2 gap-x-3.5 gap-y-10 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4"
     >
       {Array.from({ length: count }, (_, index) => (
         <div key={index} className="space-y-3">
           <Skeleton className="aspect-[4/5]" />
-          <Skeleton className="h-3 w-16" />
           <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-3 w-16" />
         </div>
       ))}
     </div>

@@ -1,79 +1,90 @@
 import Link from "next/link";
-import { Arrow, ButtonLink } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/eyebrow";
-import { MediaFrame } from "@/components/ui/media-frame";
-import type { Collection } from "@/lib/types";
-import { heroImage } from "@/lib/media";
+import { HungPhoto } from "@/components/ui/hung-photo";
+import { Tag } from "@/components/ui/tag";
+import { formatCount } from "@/lib/format";
+import type { Collection, CollectionSlug } from "@/lib/types";
 
 /**
- * Editorial hero: oversized headline with copy and actions, then a wide
- * lifestyle photograph. The image is the LCP element, so it is preloaded.
+ * Where each collection hangs on the desktop board, as a percentage of the
+ * board (a 644×616 composition on the 28px grid). Below `lg` the slots fall
+ * back to a regular grid of 4:5 frames.
  */
-export function Hero({ collections }: { collections: readonly Collection[] }) {
-  return (
-    <section aria-labelledby="hero-title" className="border-b border-line">
-      <Container className="pb-6 pt-8 md:pb-10 md:pt-12 lg:pt-14">
-        <div className="grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-10">
-          <div className="lg:col-span-8">
-            <Eyebrow className="mb-5 md:mb-7">Premium urban utility</Eyebrow>
-            <h1 id="hero-title" className="text-display font-bold uppercase">
-              Better finds.
-              <br />
-              Everyday use<span className="text-accent">.</span>
-            </h1>
-          </div>
-          <div className="lg:col-span-4 lg:pb-2">
-            <p className="max-w-md text-base text-muted md:text-lg">
-              Practical essentials for your home, work, travel and everything
-              in between.
-            </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-              <ButtonLink href="/shop" variant="accent" size="lg">
-                Shop now
-                <Arrow />
-              </ButtonLink>
-              <ButtonLink href="/about" variant="secondary" size="lg">
-                Discover Forgeline
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
-      </Container>
+const slots = [
+  "lg:left-0 lg:top-0 lg:h-[45.45%] lg:w-[34.78%]",
+  "lg:left-[39.13%] lg:top-0 lg:h-[40.91%] lg:w-[30.43%]",
+  "lg:left-[73.91%] lg:top-0 lg:h-[36.36%] lg:w-[26.09%]",
+  "lg:left-0 lg:top-[54.55%] lg:h-[40.91%] lg:w-[30.43%]",
+  "lg:left-[34.78%] lg:top-1/2 lg:h-[45.45%] lg:w-[34.78%]",
+] as const;
+const emptySlot = "lg:left-[73.91%] lg:top-[45.45%] lg:h-[31.82%] lg:w-[26.09%]";
+const slotBase = "relative aspect-[4/5] lg:absolute lg:aspect-auto";
 
-      <Container className="pb-8 md:pb-12">
-        <div className="relative">
-          {/*
-            2:1 master. Phones crop to 4:3 and tablets to 16:10; the focal
-            point keeps the backpack, bottle, mug and notebook in frame.
-          */}
-          <MediaFrame
-            image={heroImage}
-            alt="Everyday essentials arranged in a sunlit urban interior"
-            sizes="(min-width: 90rem) 1344px, 100vw"
-            preload
-            imageClassName="object-[34%_50%] sm:object-[40%_50%] lg:object-center"
-            className="aspect-[4/3] rounded-sm sm:aspect-[16/10] lg:aspect-[2/1]"
-          />
-          <nav
-            aria-label="Shop by collection"
-            className="mt-3 sm:absolute sm:bottom-4 sm:left-4 sm:mt-0 lg:bottom-6 lg:left-6"
-          >
-            <ul className="flex flex-wrap gap-1.5">
-              {collections.map((collection) => (
-                <li key={collection.slug}>
-                  <Link
-                    href={`/collections/${collection.slug}`}
-                    className="group inline-flex h-10 items-center gap-1.5 rounded-sm border border-line bg-surface px-3 text-[0.6875rem] font-semibold uppercase tracking-label transition-colors hover:border-foreground hover:bg-foreground hover:text-background sm:h-9 sm:border-transparent sm:bg-background/92 sm:backdrop-blur-sm"
-                  >
-                    {collection.name}
-                    <Arrow className="size-3 opacity-60 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+/**
+ * The homepage hero is the board itself: the five collections hang on it,
+ * and one dashed outline is kept for products that are still being sourced.
+ */
+export function Hero({
+  collections,
+  counts,
+}: {
+  collections: readonly Collection[];
+  counts: Readonly<Record<CollectionSlug, number>>;
+}) {
+  return (
+    <section aria-labelledby="hero-title" className="bg-board">
+      <Container className="grid gap-10 pb-16 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,46%)] lg:gap-14 lg:pb-21 lg:pt-9">
+        <div>
+          <h1 id="hero-title" className="text-display font-extrabold font-wide">
+            A place for everything you use every day.
+          </h1>
+          <p className="mt-5 max-w-[34ch] text-lg lg:mt-7 lg:text-xl">
+            Practical essentials for your home, work, travel and everything in
+            between.
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:mt-8">
+            <ButtonLink href="/shop" size="lg">
+              Shop now
+            </ButtonLink>
+            <ButtonLink href="/about" size="lg" variant="light">
+              Discover Forgeline
+            </ButtonLink>
+          </div>
         </div>
+
+        <ul
+          role="list"
+          aria-label="Collections"
+          className="grid grid-cols-2 gap-x-3.5 gap-y-9 md:grid-cols-3 md:gap-x-6 lg:relative lg:block lg:aspect-[644/616]"
+        >
+          {collections.slice(0, slots.length).map((collection, index) => (
+            <li key={collection.slug} className={`${slotBase} ${slots[index]}`}>
+              <Link href={`/collections/${collection.slug}`} className="block size-full">
+                <HungPhoto
+                  image={collection.image}
+                  alt=""
+                  decorative
+                  sizes="(min-width: 90rem) 230px, (min-width: 64rem) 16vw, (min-width: 48rem) 30vw, 46vw"
+                  className="size-full"
+                  tag={
+                    <Tag>
+                      {collection.name}
+                      <span className="font-normal max-[359px]:hidden lg:max-xl:hidden">
+                        {formatCount(counts[collection.slug], "item")}
+                      </span>
+                    </Tag>
+                  }
+                />
+              </Link>
+            </li>
+          ))}
+          <li
+            className={`${slotBase} ${emptySlot} flex items-center justify-center border-2 border-dashed border-foreground/60 p-4 text-center text-sm leading-snug`}
+          >
+            Space kept for products still in sourcing
+          </li>
+        </ul>
       </Container>
     </section>
   );
