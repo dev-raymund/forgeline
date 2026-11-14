@@ -37,9 +37,8 @@
   --text-eyebrow--letter-spacing: 0.14em;
   --tracking-brand: 0.2em;
 
-  /* Content width */
+  /* Content width (reading width uses Tailwind's built-in max-w-prose: 65ch) */
   --container-content: 80rem;
-  --container-prose: 40rem;
 
   /* Border radius: restrained */
   --radius-*: initial;
@@ -93,6 +92,8 @@
   html {
     color-scheme: light;
     -webkit-text-size-adjust: 100%;
+    /* Keep in-page targets (e.g. the skip link) clear of the sticky header. */
+    scroll-padding-top: 4rem;
   }
 
   body {

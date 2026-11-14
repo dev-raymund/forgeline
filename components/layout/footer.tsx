@@ -1,4 +1,3 @@
-import { cacheLife } from "next/cache";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Wordmark } from "@/components/ui/wordmark";
@@ -6,14 +5,11 @@ import { getCollections } from "@/lib/catalog";
 import { companyLinks, site } from "@/lib/site";
 
 /**
- * Reading the clock is non-deterministic, so under Cache Components it must
- * happen in a cached scope to keep the footer in the static shell.
+ * Inlined at build time from next.config.ts. Reading the clock during render
+ * would require a cached scope with a revalidation period, which would make
+ * every page regenerate on a schedule. The year updates on the next deploy.
  */
-async function CopyrightYear() {
-  "use cache";
-  cacheLife("days");
-  return <>{new Date().getFullYear()}</>;
-}
+const copyrightYear = process.env.FORGELINE_BUILD_YEAR;
 
 const linkClass = "text-sm text-muted transition-colors hover:text-foreground";
 
@@ -83,7 +79,8 @@ export async function Footer() {
 
       <Container className="flex flex-col gap-2 border-t border-line py-6 text-xs text-muted md:flex-row md:justify-between">
         <p>
-          © <CopyrightYear /> {site.name}. All rights reserved.
+          © {copyrightYear ? `${copyrightYear} ` : ""}
+          {site.name}. All rights reserved.
         </p>
         <p>Preview store: products shown are demo content.</p>
       </Container>

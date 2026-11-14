@@ -35,13 +35,17 @@ npm run dev        # http://localhost:3000
 
 Run `lint`, `typecheck` and `build` before every commit.
 
+To regenerate `app/favicon.ico` after changing the monogram, run `node scripts/generate-favicon.mjs`. It has no dependencies, and its geometry must stay in sync with `app/icon.svg` and `app/apple-icon.tsx`.
+
 ## Project structure
 
 ```
 app/
   layout.tsx              Root layout: fonts, metadata, viewport
   globals.css             Design tokens and base styles
-  icon.svg, apple-icon.tsx  Favicon and home-screen icon
+  favicon.ico, icon.svg, apple-icon.tsx  Favicons and home-screen icon
+  opengraph-image.tsx     Site-wide 1200×630 sharing image (built at build time)
+  sitemap.ts, robots.ts   Sitemap and crawl rules
   not-found.tsx, error.tsx  Branded 404 and error pages
   (storefront)/           Routes that share the header and footer
     page.tsx              Home
@@ -63,6 +67,8 @@ lib/
   money.ts, format.ts     Integer money arithmetic and formatting
   cart.ts                 Client cart store (localStorage)
   site.ts, metadata.ts    Brand configuration and page metadata helper
+assets/fonts/             Geist TTFs for the sharing image only (SIL OFL)
+scripts/                  generate-favicon.mjs
 ```
 
 ## Conventions
@@ -72,6 +78,8 @@ lib/
 - **Demo content.** Demo products set `isDemo: true` and are labelled in the UI. They carry no prices, supplier details, reviews, inventory or shipping claims.
 - **Server first.** Components are Server Components by default. Client Components are limited to the mobile menu, add to cart, the cart link, the cart view and the error page.
 - **Caching.** Catalog routes are prerendered with `generateStaticParams`, and product and collection pages set `ensureStatic = "navigation"`. Catalog reads do not use `"use cache"` because the data is in memory. Add caching in `lib/catalog.ts` when a remote source arrives (see the comment there). Keep cookie- or request-dependent code out of cached scopes.
+- **Static output.** Every page is fully static, with no scheduled regeneration. The footer year is inlined at build time from `next.config.ts` (`FORGELINE_BUILD_YEAR`), so it updates on the next deploy.
+- **SEO.** Pages use `pageMetadata()` from `lib/metadata.ts` for the canonical URL, Open Graph tags and the sharing image. `sitemap.xml` lists the public pages and every published product and collection. `robots.txt` allows crawling only on a Vercel production build whose production domain is `forgeline.live`. Every other build, including production on `*.vercel.app`, returns `Disallow: /`.
 - **Styling.** Use the tokens in `app/globals.css` (`text-muted`, `border-line`, `max-w-content`, `px-gutter`, `py-section`, …). The default Tailwind palette is disabled. The site is light-only.
 
 ## Deployment

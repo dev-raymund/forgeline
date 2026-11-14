@@ -14,6 +14,7 @@ export function MobileNav({
   companyLinks: readonly NavLink[];
 }) {
   const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -26,8 +27,16 @@ export function MobileNav({
         buttonRef.current?.focus();
       }
     };
+    // Close when the user taps or clicks anywhere outside the menu.
+    const onPointerDown = (event: PointerEvent) => {
+      if (!containerRef.current?.contains(event.target as Node)) setOpen(false);
+    };
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
   }, [open]);
 
   const close = () => setOpen(false);
@@ -35,14 +44,23 @@ export function MobileNav({
     "block py-3 text-lg tracking-tight transition-colors hover:text-muted";
 
   return (
-    <div className="md:hidden">
+    <div
+      ref={containerRef}
+      className="md:hidden"
+      onBlur={(event) => {
+        // Close when keyboard focus moves outside the menu. A null
+        // relatedTarget (e.g. Safari mouse clicks) is handled by pointerdown.
+        const next = event.relatedTarget;
+        if (open && next && !event.currentTarget.contains(next)) setOpen(false);
+      }}
+    >
       <button
         ref={buttonRef}
         type="button"
         aria-expanded={open}
         aria-controls={PANEL_ID}
         onClick={() => setOpen((value) => !value)}
-        className="-mr-2 inline-flex h-10 items-center gap-2 rounded-md px-2 text-sm font-medium"
+        className="-mr-2 inline-flex h-10 min-w-10 items-center justify-center gap-2 rounded-md px-2 text-sm font-medium"
       >
         <span aria-hidden="true" className="relative block h-3 w-4">
           <span
@@ -52,14 +70,15 @@ export function MobileNav({
             className={`absolute left-0 block h-px w-4 bg-foreground transition-transform ${open ? "top-1.5 -rotate-45" : "top-2.5"}`}
           />
         </span>
-        {open ? "Close" : "Menu"}
+        {/* Constant accessible name; aria-expanded conveys open/closed. */}
+        <span className="sr-only sm:not-sr-only">Menu</span>
       </button>
 
       {open && (
         <nav
           id={PANEL_ID}
           aria-label="Mobile"
-          className="absolute inset-x-0 top-full max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-line bg-background"
+          className="absolute inset-x-0 top-full max-h-[calc(100dvh-6rem)] overflow-y-auto border-b border-line bg-background"
         >
           <div className="px-gutter pb-8 pt-4">
             <Link
@@ -90,7 +109,7 @@ export function MobileNav({
                   <Link
                     href={link.href}
                     onClick={close}
-                    className="block py-2 text-sm text-muted transition-colors hover:text-foreground"
+                    className="block py-2.5 text-sm text-muted transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </Link>

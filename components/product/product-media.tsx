@@ -9,6 +9,9 @@ import type { ProductImage } from "@/lib/types";
  *
  * Images lazy-load by default; pass `preload` only for the single
  * above-the-fold image that is likely to be the LCP element.
+ *
+ * Set `decorative` when the media sits inside a link or row that already
+ * names the product, so assistive technology does not announce it twice.
  */
 export function ProductMedia({
   image,
@@ -16,6 +19,7 @@ export function ProductMedia({
   label,
   sizes,
   preload = false,
+  decorative = false,
   className,
 }: {
   image?: ProductImage;
@@ -23,6 +27,7 @@ export function ProductMedia({
   label?: string;
   sizes: string;
   preload?: boolean;
+  decorative?: boolean;
   className?: string;
 }) {
   return (
@@ -35,7 +40,7 @@ export function ProductMedia({
       {image ? (
         <Image
           src={image.src}
-          alt={image.alt}
+          alt={decorative ? "" : image.alt}
           fill
           sizes={sizes}
           preload={preload}
@@ -43,8 +48,9 @@ export function ProductMedia({
         />
       ) : (
         <div
-          role="img"
-          aria-label={`${name}: product photo coming soon`}
+          {...(decorative
+            ? { "aria-hidden": true }
+            : { role: "img", "aria-label": `${name}: product photo coming soon` })}
           className="absolute inset-0 flex flex-col justify-between p-3 sm:p-4"
         >
           <span

@@ -21,6 +21,7 @@ export function ProductCard({
           name={product.name}
           label={product.isDemo ? "Demo" : collectionName}
           sizes={productGridSizes}
+          decorative
           className="border border-transparent transition-colors group-hover:border-line-strong"
         />
         <div className="mt-4 space-y-1">

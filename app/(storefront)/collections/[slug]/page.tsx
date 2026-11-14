@@ -84,9 +84,9 @@ async function CollectionContent({
         title={collection.name}
         description={collection.description}
       />
-      <p className="py-6 text-sm text-muted">
+      <h2 className="py-6 text-sm font-normal text-muted">
         {formatCount(products.length, "product")}
-      </p>
+      </h2>
       <ProductGrid products={products} />
 
       <nav

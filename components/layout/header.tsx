@@ -18,7 +18,7 @@ export async function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-background">
-      <Container className="relative flex h-16 items-center gap-6">
+      <Container className="relative flex h-16 items-center gap-4">
         <Link
           href="/"
           aria-label="Forgeline home"

@@ -33,11 +33,9 @@ export const metadata: Metadata = {
     title: `${site.name} | ${site.tagline}`,
     description: site.description,
   },
-  twitter: {
-    card: "summary",
-    title: `${site.name} | ${site.tagline}`,
-    description: site.description,
-  },
+  // No twitter title/description here: child pages would inherit them.
+  // X falls back to each page's og:title, og:description and og:image.
+  twitter: { card: "summary_large_image" },
   formatDetection: { telephone: false },
 };
 
