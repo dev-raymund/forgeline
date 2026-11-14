@@ -11,8 +11,8 @@ Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 | Phase | Scope | Status |
 | --- | --- | --- |
 | Foundation (done) | Storefront pages, client cart, typed demo catalog, SEO and indexing switch, visual redesign | Done |
-| A | Finish the visual storefront (editorial photography) | In progress: 5 of 7 images live; blocked on 2 replacements (Gear, Brand) |
-| B | Business decisions: market, supplier, products, margins | Not started |
+| A | Finish the visual storefront (editorial photography) | Done |
+| B | Business decisions: market, supplier, products, margins | Not started (plan to be proposed for approval) |
 | C | Real catalog | Not started (needs B) |
 | D | Commerce backend (hosted checkout, orders, webhooks, email) | Not started (needs B, C) |
 | E | Policies and trust pages | Not started (needs B, D) |
@@ -24,13 +24,13 @@ Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 - `main` is at `79b6d85`: the merge of PR #1, which contains only the first Phase 1 commit (`bacfd99`). It predates the robots, noindex and `INDEXING_ENABLED` safeguards.
 - The production deployment (`forgeline-sigma.vercel.app`) is behind Vercel Authentication, so it is not publicly reachable or crawlable.
 - Indexing is off by design (`lib/seo.ts`). It must stay off until the launch step in Phase F.
-- `public/images/` now holds the hero and the Home, Tech, Active and Tools collection images. Gear and Brand still use placeholders.
+- `public/images/` holds all editorial images: the hero, five collections and the brand section. Product images remain placeholders until Phase C.
 
 ---
 
 ## Phase A: Finish the visual storefront
 
-Status: **In progress; blocked on the owner for two replacement images.**
+Status: **Done.**
 
 - [x] Confirm the seven image files are in `~/Downloads`
 - [x] Inspect each at full size with 2× zooms of risky regions
@@ -41,14 +41,15 @@ Status: **In progress; blocked on the owner for two replacement images.**
 - [x] Crop to ratio and convert to WebP (sharp, quality 80–82, metadata stripped)
   - [x] `public/images/hero/forgeline-hero.webp` (1440×720, 60 KB)
   - [x] `public/images/collections/{home,tech,active,tools}.webp` (920×1150, 58–103 KB)
-  - [ ] `public/images/collections/gear.webp`: waiting on replacement
-  - [ ] `public/images/brand/forgeline-editorial.webp`: waiting on replacement
+  - [x] `public/images/collections/gear.webp` (616×770, 72 KB): no regenerated version arrived, so the owner approved a 4:5 crop of the original that removes the navy jacket, with the stitched label retouched out
+  - [x] `public/images/brand/forgeline-editorial.webp` (1192×894, 46 KB): the owner approved a version with the logo-like leather patch retouched out using tone-matched canvas texture
 - [x] Wire into the slots with descriptive alt text and focal points (`position`). Slots now follow the image ratios: hero 2:1 on desktop, 16:10 on tablet, 4:3 on phones; collection cards 4:5 everywhere; brand 4:3
 - [x] Only the homepage hero is preloaded (verified: exactly one image preload site-wide)
 - [x] Product images remain honest placeholders
 - [x] Screenshots at 1440, 768, 390 and 320 px: no overflow, no broken images, no console errors
 - [x] lint, typecheck, build; committed and pushed to the feature branch
-- [ ] Add the Gear and Brand replacements once supplied (inspect, export, wire, screenshot)
+- [x] Add Gear and Brand (retouched and cropped versions, approved by the owner), re-verify and re-screenshot
+- Optional later: replace any editorial image with a higher-resolution or real photograph by swapping the file and its dimensions. No layout changes are needed
 
 ## Phase B: Business decisions (owner decides; agent prepares material)
 
@@ -117,4 +118,5 @@ Merging or pushing to `main` · changing the Vercel production branch or domains
 | --- | --- | --- |
 | 2026-11-14 | Foundation, cleanup, indexing switch, visual redesign | Commits `bacfd99` → `7b6869c` on the feature branch |
 | 2026-11-14 | Roadmap created; repository state verified | `main` found to contain PR #1 (`bacfd99`); production behind Vercel Authentication |
-| 2026-11-14 | Phase A: editorial images | 5 of 7 images inspected, exported and wired in; Gear and Brand rejected and awaiting replacements |
+| 2026-11-14 | Phase A: editorial images | 5 of 7 images inspected, exported and wired in; Gear and Brand rejected and awaiting replacements (`88d1aba`) |
+| 2026-11-14 | Phase A: completion | Gear (crop plus retouch) and Brand (retouch) approved and wired in; all editorial slots filled; Phase A done |

@@ -15,8 +15,12 @@ export const heroImage: ProductImage | undefined = {
 };
 
 /**
- * Brand section image, 4:3. Unset until an approved replacement is supplied
- * (the first version was rejected: a leather patch read as a logo).
- * Target file: /images/brand/forgeline-editorial.webp
+ * Brand section image, 4:3 (1192×894). Generated editorial image; a
+ * logo-like leather patch on the bag was retouched out before export.
  */
-export const brandImage: ProductImage | undefined = undefined;
+export const brandImage: ProductImage | undefined = {
+  src: "/images/brand/forgeline-editorial.webp",
+  alt: "A calm corner of a sunlit loft: an oak spindle chair, a charcoal canvas messenger bag on the concrete floor and a stoneware mug on the window ledge.",
+  width: 1192,
+  height: 894,
+};

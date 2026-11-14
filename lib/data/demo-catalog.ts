@@ -12,19 +12,19 @@ import type { Collection, Product } from "@/lib/types";
 /**
  * Collections are real (the store's five categories). Their images are
  * generated editorial scenes, not product photos, so they show no specific
- * catalog item. 4:5 masters at 920×1150; `position` sets the focal point
- * used when a slot crops them. Gear has no image until an approved
- * replacement is supplied.
+ * catalog item. 4:5 masters (920×1150; Gear is a 616×770 crop that removes
+ * an off-palette apparel item). `position` sets the focal point used when a
+ * slot crops them.
  */
 const collectionImage = (
   slug: string,
   alt: string,
   position: string,
+  size: { width: number; height: number } = { width: 920, height: 1150 },
 ): Collection["image"] => ({
   src: `/images/collections/${slug}.webp`,
   alt,
-  width: 920,
-  height: 1150,
+  ...size,
   position,
 });
 
@@ -35,6 +35,12 @@ export const demoCollections: readonly Collection[] = [
     summary: "Everyday carry and travel accessories.",
     description:
       "Compact, practical pieces for the things you take with you, from the daily commute to longer trips.",
+    image: collectionImage(
+      "gear",
+      "A charcoal waxed-canvas backpack with orange zip pulls hanging from a black hook on a concrete pillar beside a loft window.",
+      "58% 38%",
+      { width: 616, height: 770 },
+    ),
   },
   {
     slug: "home",
