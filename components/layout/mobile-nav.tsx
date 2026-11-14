@@ -2,15 +2,23 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { buttonStyles } from "@/components/ui/button";
+import { MediaFrame } from "@/components/ui/media-frame";
 import type { NavLink } from "@/lib/site";
+import type { ProductImage } from "@/lib/types";
 
 const PANEL_ID = "mobile-navigation";
 
+export interface CollectionNavItem extends NavLink {
+  readonly summary: string;
+  readonly image?: ProductImage;
+}
+
 export function MobileNav({
-  collectionLinks,
+  items,
   companyLinks,
 }: {
-  collectionLinks: readonly NavLink[];
+  items: readonly CollectionNavItem[];
   companyLinks: readonly NavLink[];
 }) {
   const [open, setOpen] = useState(false);
@@ -40,13 +48,11 @@ export function MobileNav({
   }, [open]);
 
   const close = () => setOpen(false);
-  const linkClass =
-    "block py-3 text-lg tracking-tight transition-colors hover:text-muted";
 
   return (
     <div
       ref={containerRef}
-      className="md:hidden"
+      className="lg:hidden"
       onBlur={(event) => {
         // Close when keyboard focus moves outside the menu. A null
         // relatedTarget (e.g. Safari mouse clicks) is handled by pointerdown.
@@ -60,14 +66,14 @@ export function MobileNav({
         aria-expanded={open}
         aria-controls={PANEL_ID}
         onClick={() => setOpen((value) => !value)}
-        className="-mr-2 inline-flex h-10 min-w-10 items-center justify-center gap-2 rounded-md px-2 text-sm font-medium"
+        className="-mr-2 inline-flex h-11 min-w-11 items-center justify-center gap-2 rounded-sm px-2.5 text-xs font-semibold uppercase tracking-label"
       >
-        <span aria-hidden="true" className="relative block h-3 w-4">
+        <span aria-hidden="true" className="relative block h-3 w-[18px]">
           <span
-            className={`absolute left-0 block h-px w-4 bg-foreground transition-transform ${open ? "top-1.5 rotate-45" : "top-0.5"}`}
+            className={`absolute left-0 block h-[1.5px] w-full bg-foreground transition-transform ${open ? "top-1.5 rotate-45" : "top-0.5"}`}
           />
           <span
-            className={`absolute left-0 block h-px w-4 bg-foreground transition-transform ${open ? "top-1.5 -rotate-45" : "top-2.5"}`}
+            className={`absolute left-0 block h-[1.5px] w-full bg-foreground transition-transform ${open ? "top-1.5 -rotate-45" : "top-2.5"}`}
           />
         </span>
         {/* Constant accessible name; aria-expanded conveys open/closed. */}
@@ -78,38 +84,66 @@ export function MobileNav({
         <nav
           id={PANEL_ID}
           aria-label="Mobile"
-          className="absolute inset-x-0 top-full max-h-[calc(100dvh-6rem)] overflow-y-auto border-b border-line bg-background"
+          className="absolute inset-x-0 top-full max-h-[calc(100dvh-6rem)] overflow-y-auto border-b border-line bg-background shadow-[0_32px_48px_-32px_rgb(23_23_23/0.35)]"
         >
-          <div className="px-gutter pb-8 pt-4">
+          <div className="mx-auto max-w-content px-gutter pb-8 pt-5">
             <Link
               ref={firstLinkRef}
               href="/shop"
               onClick={close}
-              className={`${linkClass} font-medium`}
+              className={buttonStyles({ size: "lg", className: "w-full justify-between" })}
             >
-              Shop all
+              Shop all essentials
+              <span aria-hidden="true">→</span>
             </Link>
 
-            <p className="mt-6 font-mono text-eyebrow uppercase text-muted">
+            <p className="mt-7 font-mono text-eyebrow uppercase text-muted">
               Collections
             </p>
-            <ul className="mt-1 border-b border-line pb-4">
-              {collectionLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} onClick={close} className={linkClass}>
-                    {link.label}
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {items.map((item, index) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={close}
+                    className="flex items-center gap-4 rounded-sm bg-surface p-2 pr-4 transition-colors hover:bg-sunken"
+                  >
+                    {item.image ? (
+                      <MediaFrame
+                        image={item.image}
+                        alt=""
+                        decorative
+                        sizes="56px"
+                        className="size-14 shrink-0 rounded-sm"
+                      />
+                    ) : (
+                      <span
+                        aria-hidden="true"
+                        className="flex size-14 shrink-0 items-center justify-center rounded-sm bg-sunken font-mono text-xs text-muted"
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    )}
+                    <span className="min-w-0">
+                      <span className="block text-sm font-bold uppercase tracking-wide">
+                        {item.label}
+                      </span>
+                      <span className="mt-0.5 block truncate text-xs text-muted">
+                        {item.summary}
+                      </span>
+                    </span>
                   </Link>
                 </li>
               ))}
             </ul>
 
-            <ul className="mt-4">
+            <ul className="mt-6 flex gap-6 border-t border-line pt-5">
               {companyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={close}
-                    className="block py-2.5 text-sm text-muted transition-colors hover:text-foreground"
+                    className="inline-block py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </Link>

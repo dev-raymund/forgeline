@@ -82,6 +82,19 @@ scripts/                  generate-favicon.mjs
 - **SEO.** Pages use `pageMetadata()` from `lib/metadata.ts` for the canonical URL, Open Graph tags, sharing image and robots directives. Never set `robots` directly in page metadata. Indexing is controlled by one switch; see [Search engine indexing](#search-engine-indexing).
 - **Styling.** Use the tokens in `app/globals.css` (`text-muted`, `border-line`, `max-w-content`, `px-gutter`, `py-section`, …). The default Tailwind palette is disabled. The site is light-only.
 
+## Photography
+
+Every image slot uses `next/image` with a fixed aspect ratio. Until a photo is added, a branded placeholder renders in its place, so adding photos never shifts the layout. Store images locally under `public/images/` as optimized JPEGs (quality around 80); `next/image` serves AVIF or WebP at the right size.
+
+| Slot | Wire it in | Source size and ratio |
+| --- | --- | --- |
+| Products | `images` on each product in `lib/data/demo-catalog.ts` | 1200×1500 (4:5) |
+| Collections | `image` on each collection in `lib/data/demo-catalog.ts` | 1200×1600 (3:4). Keep the subject centred; cards crop to 4:5, 4:3 and 16:9 |
+| Hero | `heroImage` in `lib/media.ts` | 2400×1600 (3:2). Crops to 4:5 on mobile and 21:9 on desktop |
+| Brand section | `brandImage` in `lib/media.ts` | 1200×1500 (4:5) |
+
+Art direction: one studio set with a warm cream seamless backdrop, soft daylight from one side and gentle shadows. No text, logos or people. Every image needs descriptive `alt` text, and photos must match the product descriptions.
+
 ## Search engine indexing
 
 Indexing is **off by default**. It is controlled by the server-side environment variable `INDEXING_ENABLED` and the logic in `lib/seo.ts`. Indexing is enabled only when **all** of these are true:

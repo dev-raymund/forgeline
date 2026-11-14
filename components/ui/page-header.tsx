@@ -16,11 +16,11 @@ export function PageHeader({
   className?: string;
 }) {
   return (
-    <header className={cn("border-b border-line pb-10 pt-10 md:pb-14 md:pt-16", className)}>
+    <header className={cn("border-b border-line pb-8 pt-8 md:pb-12 md:pt-14", className)}>
       {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
-      <h1 className="text-headline font-semibold">{title}</h1>
+      <h1 className="text-headline font-bold uppercase">{title}</h1>
       {description && (
-        <p className="mt-5 max-w-prose text-base text-muted md:text-lg">
+        <p className="mt-4 max-w-prose text-base text-muted md:mt-5 md:text-lg">
           {description}
         </p>
       )}

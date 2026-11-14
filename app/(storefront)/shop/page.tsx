@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 });
 
 const pillClass =
-  "inline-flex h-9 items-center rounded-full border px-4 text-sm transition-colors";
+  "inline-flex h-11 items-center rounded-sm border px-4 text-xs font-semibold uppercase tracking-label transition-colors";
 
 export default async function ShopPage() {
   const [products, collections] = await Promise.all([
@@ -43,7 +43,7 @@ export default async function ShopPage() {
               <li key={collection.slug}>
                 <Link
                   href={`/collections/${collection.slug}`}
-                  className={`${pillClass} border-line-strong hover:border-foreground`}
+                  className={`${pillClass} border-line-strong hover:border-foreground hover:bg-foreground hover:text-background`}
                 >
                   {collection.name}
                 </Link>
@@ -53,7 +53,7 @@ export default async function ShopPage() {
         </nav>
       </PageHeader>
 
-      <h2 className="py-6 text-sm font-normal text-muted">
+      <h2 className="py-6 font-mono text-eyebrow uppercase text-muted">
         {formatCount(products.length, "product")}
       </h2>
       <ProductGrid products={products} />

@@ -42,23 +42,29 @@ export async function ProductDetails({
         />
       </div>
 
-      <article className="grid gap-10 pb-section pt-6 md:pt-8 lg:grid-cols-12 lg:gap-16">
+      <article className="grid gap-8 pb-section pt-5 md:pt-8 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-7">
-          <ProductMedia
-            image={primaryImage}
-            name={product.name}
-            label={product.isDemo ? "Demo" : collectionName}
-            sizes="(min-width: 80rem) 700px, (min-width: 64rem) 58vw, 100vw"
-            preload={Boolean(primaryImage)}
-          />
+          <div className="relative">
+            <ProductMedia
+              image={primaryImage}
+              name={product.name}
+              sizes="(min-width: 90rem) 780px, (min-width: 64rem) 55vw, 100vw"
+              preload={Boolean(primaryImage)}
+              className="rounded-sm"
+            />
+            {product.isDemo && (
+              <Badge className="absolute left-3 top-3">Demo product</Badge>
+            )}
+          </div>
           {extraImages.length > 0 && (
-            <ul role="list" className="mt-4 grid grid-cols-2 gap-4">
+            <ul role="list" className="mt-3 grid grid-cols-2 gap-3">
               {extraImages.map((image) => (
                 <li key={image.src}>
                   <ProductMedia
                     image={image}
                     name={product.name}
-                    sizes="(min-width: 64rem) 29vw, 50vw"
+                    sizes="(min-width: 64rem) 28vw, 50vw"
+                    className="rounded-sm"
                   />
                 </li>
               ))}
@@ -68,16 +74,14 @@ export async function ProductDetails({
 
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-24">
-            <div className="flex items-center gap-3">
-              <Link
-                href={`/collections/${product.category}`}
-                className="font-mono text-eyebrow uppercase text-muted transition-colors hover:text-foreground"
-              >
-                {collectionName}
-              </Link>
-              {product.isDemo && <Badge>Demo product</Badge>}
-            </div>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+            <Link
+              href={`/collections/${product.category}`}
+              className="inline-flex items-center gap-2.5 font-mono text-eyebrow uppercase text-muted transition-colors hover:text-foreground"
+            >
+              <span aria-hidden="true" className="size-1.5 bg-accent" />
+              {collectionName}
+            </Link>
+            <h1 className="mt-4 text-title font-bold uppercase md:text-[2.5rem] md:leading-[1.02]">
               {product.name}
             </h1>
             <ProductPrice price={product.price} className="mt-3 text-lg" />
@@ -96,7 +100,10 @@ export async function ProductDetails({
               aria-labelledby="product-details"
               className="mt-10 border-t border-line pt-8"
             >
-              <h2 id="product-details" className="text-sm font-medium">
+              <h2
+                id="product-details"
+                className="font-mono text-eyebrow uppercase text-foreground"
+              >
                 Details
               </h2>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted">
@@ -111,7 +118,10 @@ export async function ProductDetails({
                 aria-labelledby="product-specifications"
                 className="mt-8 border-t border-line pt-8"
               >
-                <h2 id="product-specifications" className="text-sm font-medium">
+                <h2
+                  id="product-specifications"
+                  className="font-mono text-eyebrow uppercase text-foreground"
+                >
                   Specifications
                 </h2>
                 <dl className="mt-3 divide-y divide-line text-sm">
@@ -137,7 +147,7 @@ export async function ProductDetails({
             )}
 
             {product.isDemo && (
-              <p className="mt-8 rounded-md bg-surface p-4 text-xs leading-relaxed text-muted">
+              <p className="mt-8 rounded-sm border-l-2 border-accent bg-surface p-4 text-xs leading-relaxed text-muted">
                 This is a demo product. Its details are illustrative and will
                 be confirmed, or replaced, once sourcing and pricing are
                 complete. It cannot be purchased yet.

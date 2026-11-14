@@ -1,36 +1,39 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Arrow } from "./button";
+import { Eyebrow } from "./eyebrow";
 
 export function SectionHeading({
   id,
   title,
   eyebrow,
+  description,
   action,
 }: {
   id?: string;
   title: ReactNode;
   eyebrow?: ReactNode;
+  description?: ReactNode;
   action?: { href: string; label: string };
 }) {
   return (
-    <div className="mb-8 flex items-end justify-between gap-6 md:mb-10">
-      <div>
-        {eyebrow && (
-          <p className="mb-3 font-mono text-eyebrow uppercase text-muted">
-            {eyebrow}
-          </p>
-        )}
-        <h2 id={id} className="text-2xl font-semibold tracking-tight md:text-3xl">
+    <div className="mb-8 flex flex-col gap-5 md:mb-12 md:flex-row md:items-end md:justify-between">
+      <div className="max-w-3xl">
+        {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
+        <h2 id={id} className="text-headline font-bold uppercase">
           {title}
         </h2>
+        {description && (
+          <p className="mt-4 max-w-prose text-base text-muted">{description}</p>
+        )}
       </div>
       {action && (
         <Link
           href={action.href}
-          className="shrink-0 text-sm font-medium underline-offset-4 hover:underline"
+          className="group inline-flex shrink-0 items-center gap-2 self-start border-b border-foreground pb-1 text-xs font-semibold uppercase tracking-label md:self-auto"
         >
           {action.label}
-          <span aria-hidden="true"> →</span>
+          <Arrow className="transition-transform group-hover:translate-x-0.5" />
         </Link>
       )}
     </div>

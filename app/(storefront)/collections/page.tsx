@@ -18,8 +18,8 @@ export default function CollectionsPage() {
         title="Five collections, one standard"
         description="Every collection follows the same idea: practical essentials, chosen with care, for the way you actually live."
       />
-      <div className="pt-10 md:pt-14">
-        <CollectionGrid />
+      <div className="pt-8 md:pt-12">
+        <CollectionGrid headingLevel="h2" />
       </div>
     </Container>
   );

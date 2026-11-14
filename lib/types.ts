@@ -38,6 +38,8 @@ export interface Collection {
   readonly summary: string;
   /** Longer introduction used on the collection page. */
   readonly description: string;
+  /** Category photography for collection cards and headers. */
+  readonly image?: ProductImage;
 }
 
 export interface ProductImage {

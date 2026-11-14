@@ -11,32 +11,34 @@ import { companyLinks, site } from "@/lib/site";
  */
 const copyrightYear = process.env.FORGELINE_BUILD_YEAR;
 
-const linkClass = "text-sm text-muted transition-colors hover:text-foreground";
+const linkClass =
+  "text-sm text-on-inverse transition-colors hover:text-accent";
+const headingClass = "font-mono text-eyebrow uppercase text-on-inverse-muted";
 
 export async function Footer() {
   const collections = await getCollections();
 
   return (
-    <footer className="mt-auto border-t border-line">
-      <Container className="grid gap-12 py-14 md:grid-cols-12 md:py-20">
-        <div className="md:col-span-5">
-          <Link href="/" aria-label="Forgeline home" className="text-lg">
-            <Wordmark />
+    <footer className="mt-auto bg-inverse text-on-inverse">
+      <Container className="grid gap-12 pb-12 pt-14 md:grid-cols-12 md:gap-8 md:pb-16 md:pt-20">
+        <div className="md:col-span-6 lg:col-span-8">
+          <Link href="/" aria-label="Forgeline home" className="inline-block text-lg">
+            <Wordmark tone="light" />
           </Link>
-          <p className="mt-5 text-sm font-medium">{site.tagline}</p>
-          <p className="mt-1 text-sm text-muted">{site.message}</p>
+          <p className="mt-8 text-title font-bold uppercase">{site.tagline}</p>
+          <p className="mt-2 max-w-sm text-sm text-on-inverse-muted">
+            {site.message} Curated essentials across gear, home, tech, active
+            and tools.
+          </p>
         </div>
 
-        <nav aria-labelledby="footer-shop" className="md:col-span-3">
-          <h2
-            id="footer-shop"
-            className="font-mono text-eyebrow uppercase text-muted"
-          >
+        <nav aria-labelledby="footer-shop" className="md:col-span-3 lg:col-span-2">
+          <h2 id="footer-shop" className={headingClass}>
             Shop
           </h2>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-5 space-y-3">
             <li>
-              <Link href="/shop" className={linkClass}>
+              <Link href="/shop" className={`${linkClass} font-semibold`}>
                 Shop all
               </Link>
             </li>
@@ -53,14 +55,11 @@ export async function Footer() {
           </ul>
         </nav>
 
-        <nav aria-labelledby="footer-company" className="md:col-span-2">
-          <h2
-            id="footer-company"
-            className="font-mono text-eyebrow uppercase text-muted"
-          >
+        <nav aria-labelledby="footer-company" className="md:col-span-3 lg:col-span-2">
+          <h2 id="footer-company" className={headingClass}>
             Company
           </h2>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-5 space-y-3">
             {companyLinks.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className={linkClass}>
@@ -68,6 +67,11 @@ export async function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/collections" className={linkClass}>
+                Collections
+              </Link>
+            </li>
             <li>
               <Link href="/cart" className={linkClass}>
                 Cart
@@ -77,12 +81,15 @@ export async function Footer() {
         </nav>
       </Container>
 
-      <Container className="flex flex-col gap-2 border-t border-line py-6 text-xs text-muted md:flex-row md:justify-between">
+      <Container className="flex flex-col gap-3 border-t border-line-inverse py-6 text-xs text-on-inverse-muted md:flex-row md:items-center md:justify-between">
         <p>
           © {copyrightYear ? `${copyrightYear} ` : ""}
           {site.name}. All rights reserved.
         </p>
-        <p>Preview store: products shown are demo content.</p>
+        <p className="flex items-center gap-2">
+          <span aria-hidden="true" className="size-1.5 bg-accent" />
+          Preview store: products shown are demo content.
+        </p>
       </Container>
     </footer>
   );
