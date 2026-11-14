@@ -8,9 +8,13 @@ import type { ProductImage } from "@/lib/types";
  * available, otherwise a quiet branded placeholder. The frame reserves space
  * in both cases, so nothing shifts while loading.
  *
- * Images lazy-load by default; pass `preload` only for the single
- * above-the-fold image that is likely to be the LCP element.
- * Set `decorative` when surrounding text already names the subject.
+ * Loading: lazy by default. `preload` is reserved for the homepage hero.
+ * There is deliberately no "eager" option: React 19 emits a preload hint for
+ * every server-rendered <img> that is not lazy, so eager would mean preload.
+ *
+ * Cropping: `image.position` sets the default object-position; pass
+ * responsive `object-[…]` utilities via `imageClassName` to override it per
+ * breakpoint. Set `decorative` when surrounding text already names the subject.
  */
 export function MediaFrame({
   image,
@@ -20,7 +24,7 @@ export function MediaFrame({
   preload = false,
   decorative = false,
   zoomOnHover = false,
-  position = "center",
+  imageClassName,
   className,
 }: {
   image?: ProductImage;
@@ -31,8 +35,7 @@ export function MediaFrame({
   preload?: boolean;
   decorative?: boolean;
   zoomOnHover?: boolean;
-  /** CSS object-position for responsive cropping. */
-  position?: string;
+  imageClassName?: string;
   className?: string;
 }) {
   return (
@@ -44,11 +47,16 @@ export function MediaFrame({
           fill
           sizes={sizes}
           preload={preload}
-          style={{ objectPosition: position }}
+          style={
+            image.position && !imageClassName
+              ? { objectPosition: image.position }
+              : undefined
+          }
           className={cn(
             "object-cover",
+            imageClassName,
             zoomOnHover &&
-              "transition-transform duration-700 ease-[var(--ease-standard)] group-hover:scale-[1.03]",
+              "transition-transform duration-700 ease-standard group-hover:scale-[1.03]",
           )}
         />
       ) : (

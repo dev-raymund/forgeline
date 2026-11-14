@@ -9,6 +9,25 @@
  */
 import type { Collection, Product } from "@/lib/types";
 
+/**
+ * Collections are real (the store's five categories). Their images are
+ * generated editorial scenes, not product photos, so they show no specific
+ * catalog item. 4:5 masters at 920×1150; `position` sets the focal point
+ * used when a slot crops them. Gear has no image until an approved
+ * replacement is supplied.
+ */
+const collectionImage = (
+  slug: string,
+  alt: string,
+  position: string,
+): Collection["image"] => ({
+  src: `/images/collections/${slug}.webp`,
+  alt,
+  width: 920,
+  height: 1150,
+  position,
+});
+
 export const demoCollections: readonly Collection[] = [
   {
     slug: "gear",
@@ -23,6 +42,11 @@ export const demoCollections: readonly Collection[] = [
     summary: "Practical home and kitchen essentials.",
     description:
       "Useful, well-considered essentials for the kitchen and the rest of the home.",
+    image: collectionImage(
+      "home",
+      "Stoneware mugs, a black pour-over kettle, a linen cloth and a small succulent on an oak shelf beside a loft window.",
+      "62% 50%",
+    ),
   },
   {
     slug: "tech",
@@ -30,6 +54,11 @@ export const demoCollections: readonly Collection[] = [
     summary: "Useful gadgets and desk accessories.",
     description:
       "Practical gadgets and desk accessories that keep your setup tidy and working.",
+    image: collectionImage(
+      "tech",
+      "A closed laptop, a braided charging cable, a power bank, an earbuds case and a notebook arranged on a felt desk mat.",
+      "58% 62%",
+    ),
   },
   {
     slug: "active",
@@ -37,6 +66,11 @@ export const demoCollections: readonly Collection[] = [
     summary: "Fitness and outdoor accessories.",
     description:
       "Accessories for training, movement and time spent outdoors.",
+    image: collectionImage(
+      "active",
+      "A rolled exercise mat with a leather carry strap, an insulated bottle, a folded towel and grey trainers on a concrete floor.",
+      "50% 74%",
+    ),
   },
   {
     slug: "tools",
@@ -44,6 +78,11 @@ export const demoCollections: readonly Collection[] = [
     summary: "DIY and workshop essentials.",
     description:
       "Dependable essentials for repairs, projects and the workshop.",
+    image: collectionImage(
+      "tools",
+      "A multitool, a flashlight, a utility knife, two tape measures and a canvas tool roll laid out on a steel workbench.",
+      "52% 52%",
+    ),
   },
 ];
 

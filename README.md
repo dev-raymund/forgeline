@@ -86,12 +86,16 @@ scripts/                  generate-favicon.mjs
 
 Every image slot uses `next/image` with a fixed aspect ratio. Until a photo is added, a branded placeholder renders in its place, so adding photos never shifts the layout. Store images locally under `public/images/` as optimized JPEGs (quality around 80); `next/image` serves AVIF or WebP at the right size.
 
-| Slot | Wire it in | Source size and ratio |
-| --- | --- | --- |
-| Products | `images` on each product in `lib/data/demo-catalog.ts` | 1200×1500 (4:5) |
-| Collections | `image` on each collection in `lib/data/demo-catalog.ts` | 1200×1600 (3:4). Keep the subject centred; cards crop to 4:5, 4:3 and 16:9 |
-| Hero | `heroImage` in `lib/media.ts` | 2400×1600 (3:2). Crops to 4:5 on mobile and 21:9 on desktop |
-| Brand section | `brandImage` in `lib/media.ts` | 1200×1500 (4:5) |
+| Slot | File | Wire it in | Ratio and current size |
+| --- | --- | --- | --- |
+| Hero | `public/images/hero/forgeline-hero.webp` | `heroImage` in `lib/media.ts` | 2:1, 1440×720. Shown at 2:1 on desktop, 16:10 on tablet and 4:3 on phones (focal points set in `components/home/hero.tsx`) |
+| Collections | `public/images/collections/{slug}.webp` | `image` on each collection in `lib/data/demo-catalog.ts`, with a `position` focal point | 4:5, 920×1150. Cards always show 4:5; the collection page header crops to 4:3 on phones |
+| Brand section | `public/images/brand/forgeline-editorial.webp` | `brandImage` in `lib/media.ts` | 4:3 |
+| Products | `public/images/products/…` | `images` on each product in the catalog | 4:5. Must be real photos of the exact variant (Phase C) |
+
+Export images by cropping to the exact ratio at native resolution (never upscale) and converting to WebP at quality 80–82 with metadata stripped. `sharp` ships with Next.js, so no extra dependency is needed. Only the homepage hero uses `preload`; every other image lazy-loads. Don't add `loading="eager"`: React 19 turns any non-lazy server-rendered image into a preload.
+
+**Status:** the hero and the Home, Tech, Active and Tools images are in place. Gear and Brand are waiting on approved replacements (the first versions were rejected for an off-palette apparel item and a logo-like patch).
 
 Art direction: one studio set with a warm cream seamless backdrop, soft daylight from one side and gentle shadows. No text, logos or people. Every image needs descriptive `alt` text, and photos must match the product descriptions.
 

@@ -28,8 +28,8 @@ export function BrandStatement() {
           <MediaFrame
             image={brandImage}
             alt="A calm, uncluttered shelf with a few well-chosen essentials"
-            sizes="(min-width: 90rem) 520px, (min-width: 48rem) 40vw, 100vw"
-            className="aspect-[4/3] rounded-sm md:aspect-[4/5]"
+            sizes="(min-width: 90rem) 560px, (min-width: 48rem) 42vw, 100vw"
+            className="aspect-[4/3] rounded-sm"
           />
         </div>
       </Container>

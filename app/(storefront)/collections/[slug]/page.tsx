@@ -83,20 +83,20 @@ async function CollectionContent({
           ]}
         />
       </div>
-      <header className="grid gap-6 border-b border-line pb-8 pt-6 md:grid-cols-12 md:items-end md:gap-10 md:pb-12 md:pt-8">
-        <div className="md:col-span-6 lg:col-span-5">
+      <header className="grid gap-6 border-b border-line pb-8 pt-6 md:grid-cols-12 md:items-center md:gap-10 md:pb-12 md:pt-8">
+        <div className="md:col-span-7 lg:col-span-6">
           <Eyebrow className="mb-4">{collection.summary}</Eyebrow>
           <h1 className="text-display font-bold uppercase">{collection.name}</h1>
           <p className="mt-5 max-w-prose text-base text-muted md:text-lg">
             {collection.description}
           </p>
         </div>
+        {/* 4:5 photography; phones crop to 4:3 around the image's focal point. */}
         <MediaFrame
           image={collection.image}
           alt={`${collection.name} collection`}
-          sizes="(min-width: 90rem) 760px, (min-width: 48rem) 50vw, 100vw"
-          preload={Boolean(collection.image)}
-          className="aspect-[16/9] rounded-sm md:col-span-6 md:aspect-[4/3] lg:col-span-7 lg:aspect-[16/9]"
+          sizes="(min-width: 90rem) 440px, (min-width: 64rem) 33vw, (min-width: 48rem) 40vw, 100vw"
+          className="aspect-[4/3] rounded-sm md:col-span-5 md:aspect-[4/5] lg:col-span-4 lg:col-start-9"
         />
       </header>
       <h2 className="py-6 font-mono text-eyebrow uppercase text-muted">
@@ -137,13 +137,13 @@ function CollectionSkeleton() {
   return (
     <div>
       <Skeleton className="mt-6 h-4 w-48 md:mt-8" />
-      <div className="grid gap-6 border-b border-line pb-8 pt-6 md:grid-cols-12 md:items-end md:gap-10 md:pb-12 md:pt-8">
-        <div className="space-y-4 md:col-span-6 lg:col-span-5">
+      <div className="grid gap-6 border-b border-line pb-8 pt-6 md:grid-cols-12 md:items-center md:gap-10 md:pb-12 md:pt-8">
+        <div className="space-y-4 md:col-span-7 lg:col-span-6">
           <Skeleton className="h-3 w-40" />
           <Skeleton className="h-14 w-56" />
           <Skeleton className="h-5 w-full max-w-prose" />
         </div>
-        <Skeleton className="aspect-[16/9] md:col-span-6 md:aspect-[4/3] lg:col-span-7 lg:aspect-[16/9]" />
+        <Skeleton className="aspect-[4/3] md:col-span-5 md:aspect-[4/5] lg:col-span-4 lg:col-start-9" />
       </div>
       <div className="py-6">
         <Skeleton className="h-4 w-24" />

@@ -43,24 +43,28 @@ export function Hero({ collections }: { collections: readonly Collection[] }) {
 
       <Container className="pb-8 md:pb-12">
         <div className="relative">
+          {/*
+            2:1 master. Phones crop to 4:3 and tablets to 16:10; the focal
+            point keeps the backpack, bottle, mug and notebook in frame.
+          */}
           <MediaFrame
             image={heroImage}
             alt="Everyday essentials arranged in a sunlit urban interior"
             sizes="(min-width: 90rem) 1344px, 100vw"
             preload
-            position="center 60%"
-            className="aspect-[4/5] rounded-sm sm:aspect-[16/10] lg:aspect-[21/9]"
+            imageClassName="object-[34%_50%] sm:object-[40%_50%] lg:object-center"
+            className="aspect-[4/3] rounded-sm sm:aspect-[16/10] lg:aspect-[2/1]"
           />
           <nav
             aria-label="Shop by collection"
-            className="absolute inset-x-3 bottom-3 sm:inset-x-auto sm:left-4 sm:bottom-4 lg:left-6 lg:bottom-6"
+            className="mt-3 sm:absolute sm:bottom-4 sm:left-4 sm:mt-0 lg:bottom-6 lg:left-6"
           >
             <ul className="flex flex-wrap gap-1.5">
               {collections.map((collection) => (
                 <li key={collection.slug}>
                   <Link
                     href={`/collections/${collection.slug}`}
-                    className="group inline-flex h-9 items-center gap-1.5 rounded-sm bg-background/92 px-3 text-[0.6875rem] font-semibold uppercase tracking-label backdrop-blur-sm transition-colors hover:bg-foreground hover:text-background"
+                    className="group inline-flex h-10 items-center gap-1.5 rounded-sm border border-line bg-surface px-3 text-[0.6875rem] font-semibold uppercase tracking-label transition-colors hover:border-foreground hover:bg-foreground hover:text-background sm:h-9 sm:border-transparent sm:bg-background/92 sm:backdrop-blur-sm"
                   >
                     {collection.name}
                     <Arrow className="size-3 opacity-60 transition-transform group-hover:translate-x-0.5" />

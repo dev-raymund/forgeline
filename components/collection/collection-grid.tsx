@@ -6,26 +6,23 @@ import { cn } from "@/lib/cn";
 import { formatCount } from "@/lib/format";
 
 /**
- * Responsive editorial layout for the five collections:
- * - mobile: two columns, the fifth card spans the full width
- * - tablet: two wide cards over three tall cards
- * - desktop: five equal portrait cards
+ * Responsive layout for the five collections. Images stay 4:5 everywhere
+ * (matching the photography); wide slots switch the card to a side-by-side
+ * layout instead of cropping the image:
+ * - mobile: 2 columns; card 5 spans both columns, side by side
+ * - tablet: 3 cards in a row, then cards 4 and 5 side by side
+ * - desktop: 5 equal portrait cards
  */
-const layout = [
-  { card: "md:col-span-3", media: "aspect-[4/5] md:aspect-[4/3] lg:aspect-[3/4]" },
-  { card: "md:col-span-3", media: "aspect-[4/5] md:aspect-[4/3] lg:aspect-[3/4]" },
-  { card: "md:col-span-2", media: "aspect-[4/5] lg:aspect-[3/4]" },
-  { card: "md:col-span-2", media: "aspect-[4/5] lg:aspect-[3/4]" },
-  { card: "col-span-2 md:col-span-2", media: "aspect-[16/9] md:aspect-[4/5] lg:aspect-[3/4]" },
-] as const;
+const MOBILE_ROW = "max-md:grid max-md:grid-cols-2 max-md:items-center max-md:gap-4";
+const TABLET_ROW = "md:max-lg:grid md:max-lg:grid-cols-2 md:max-lg:items-center md:max-lg:gap-5";
 
-const sizes = [
-  "(min-width: 64rem) 20vw, (min-width: 48rem) 50vw, 50vw",
-  "(min-width: 64rem) 20vw, (min-width: 48rem) 50vw, 50vw",
-  "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw",
-  "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw",
-  "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 100vw",
-];
+const layout = [
+  { item: "md:col-span-2", row: "", sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw" },
+  { item: "md:col-span-2", row: "", sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw" },
+  { item: "md:col-span-2", row: "", sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 33vw, 50vw" },
+  { item: "md:col-span-3", row: TABLET_ROW, sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 25vw, 50vw" },
+  { item: "col-span-2 md:col-span-3", row: cn(MOBILE_ROW, TABLET_ROW), sizes: "(min-width: 64rem) 20vw, (min-width: 48rem) 25vw, 50vw" },
+] as const;
 
 export async function CollectionGrid({
   headingLevel = "h3",
@@ -45,38 +42,47 @@ export async function CollectionGrid({
     >
       {collections.map((collection, index) => {
         const slot = layout[index % layout.length];
+        const sideBySide = slot.row !== "";
         return (
-          <li key={collection.slug} className={cn("lg:col-span-1", slot.card)}>
+          <li key={collection.slug} className={cn("lg:col-span-1", slot.item)}>
             <Link
               href={`/collections/${collection.slug}`}
-              className="group block"
+              className={cn("group block", slot.row)}
             >
               <div className="relative">
                 <MediaFrame
                   image={collection.image}
                   alt=""
                   decorative
-                  sizes={sizes[index % sizes.length]}
+                  sizes={slot.sizes}
                   zoomOnHover
-                  className={cn("rounded-sm", slot.media)}
+                  className="aspect-[4/5] rounded-sm"
                 />
                 <span className="absolute left-2.5 top-2.5 rounded-sm bg-background/92 px-2 py-1 font-mono text-eyebrow text-foreground">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
-              <div className="mt-3.5 flex items-baseline justify-between gap-3">
-                <Heading className="text-lg font-bold uppercase tracking-tight sm:text-xl">
-                  {collection.name}
-                </Heading>
-                <span className="font-mono text-eyebrow uppercase text-muted">
-                  {formatCount(counts[collection.slug], "item")}
+              <div
+                className={cn(
+                  "mt-3.5",
+                  sideBySide &&
+                    (index === 4 ? "max-md:mt-0 md:max-lg:mt-0" : "md:max-lg:mt-0"),
+                )}
+              >
+                <div className="flex items-baseline justify-between gap-3">
+                  <Heading className="text-lg font-bold uppercase tracking-tight sm:text-xl">
+                    {collection.name}
+                  </Heading>
+                  <span className="font-mono text-eyebrow uppercase text-muted">
+                    {formatCount(counts[collection.slug], "item")}
+                  </span>
+                </div>
+                <p className="mt-1.5 text-sm text-muted">{collection.summary}</p>
+                <span className="mt-3 inline-flex items-center gap-2 border-b border-foreground pb-0.5 text-[0.6875rem] font-semibold uppercase tracking-label">
+                  Discover
+                  <Arrow className="size-3 transition-transform group-hover:translate-x-0.5 group-hover:text-accent-ink" />
                 </span>
               </div>
-              <p className="mt-1.5 text-sm text-muted">{collection.summary}</p>
-              <span className="mt-3 inline-flex items-center gap-2 border-b border-foreground pb-0.5 text-[0.6875rem] font-semibold uppercase tracking-label">
-                Discover
-                <Arrow className="size-3 transition-transform group-hover:translate-x-0.5 group-hover:text-accent-ink" />
-              </span>
             </Link>
           </li>
         );
