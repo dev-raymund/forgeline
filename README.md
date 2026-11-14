@@ -79,8 +79,45 @@ scripts/                  generate-favicon.mjs
 - **Server first.** Components are Server Components by default. Client Components are limited to the mobile menu, add to cart, the cart link, the cart view and the error page.
 - **Caching.** Catalog routes are prerendered with `generateStaticParams`, and product and collection pages set `ensureStatic = "navigation"`. Catalog reads do not use `"use cache"` because the data is in memory. Add caching in `lib/catalog.ts` when a remote source arrives (see the comment there). Keep cookie- or request-dependent code out of cached scopes.
 - **Static output.** Every page is fully static, with no scheduled regeneration. The footer year is inlined at build time from `next.config.ts` (`FORGELINE_BUILD_YEAR`), so it updates on the next deploy.
-- **SEO.** Pages use `pageMetadata()` from `lib/metadata.ts` for the canonical URL, Open Graph tags and the sharing image. `sitemap.xml` lists the public pages and every published product and collection. `robots.txt` allows crawling only on a Vercel production build whose production domain is `forgeline.live`. Every other build, including production on `*.vercel.app`, returns `Disallow: /`.
+- **SEO.** Pages use `pageMetadata()` from `lib/metadata.ts` for the canonical URL, Open Graph tags, sharing image and robots directives. Never set `robots` directly in page metadata. Indexing is controlled by one switch; see [Search engine indexing](#search-engine-indexing).
 - **Styling.** Use the tokens in `app/globals.css` (`text-muted`, `border-line`, `max-w-content`, `px-gutter`, `py-section`, …). The default Tailwind palette is disabled. The site is light-only.
+
+## Search engine indexing
+
+Indexing is **off by default**. It is controlled by the server-side environment variable `INDEXING_ENABLED` and the logic in `lib/seo.ts`. Indexing is enabled only when **all** of these are true:
+
+1. `VERCEL_ENV` is `production` (set by Vercel).
+2. The canonical domain (`site.url` in `lib/site.ts`) and Vercel's production domain (`VERCEL_PROJECT_PRODUCTION_URL`, set by Vercel) are both `forgeline.live`.
+3. `INDEXING_ENABLED` is exactly `true`. If it is missing, or set to anything else (`TRUE`, `1`, `yes`), indexing stays off.
+
+| | Preview / local build | Production, indexing off | Production, indexing on |
+| --- | --- | --- | --- |
+| `robots.txt` | `Disallow: /` | `Allow: /`, no sitemap | `Allow: /` and `Sitemap:` |
+| `sitemap.xml` | Empty | Empty | Real pages, collections and products only |
+| Page `<meta name="robots">` | `noindex, nofollow` | `noindex, nofollow` | `index, follow` |
+| `X-Robots-Tag` header | `noindex, nofollow` | `noindex, nofollow` | Not sent |
+
+Notes:
+
+- **Demo products are never indexed.** They are always excluded from the sitemap and are `noindex` even when indexing is on. The same applies to collections that only contain demo products. `/cart` is always `noindex`.
+- **Production with indexing off still allows crawling.** This lets search engines read the `noindex` directives; a `robots.txt` block would hide them. Preview deployments stay fully blocked.
+- **Pages cannot loosen the switch.** `pageMetadata()` derives `robots` from it, and while indexing is off every response also carries an `X-Robots-Tag` header, which page metadata cannot override.
+- **Values are read at build time.** Pages, `robots.txt` and `sitemap.xml` are prerendered, so any change needs a redeploy.
+
+### Enabling indexing at launch
+
+1. Replace the demo catalog with real, published products (`isDemo: false`).
+2. In Vercel, go to **Project → Settings → Domains** and add `forgeline.live` as the production domain. `VERCEL_PROJECT_PRODUCTION_URL` must resolve to `forgeline.live`; `www` should redirect to it.
+3. In Vercel, go to **Project → Settings → Environment Variables** and add `INDEXING_ENABLED` = `true` for the **Production** environment only.
+4. Redeploy production. The variable is read at build time.
+5. Verify on `https://forgeline.live`:
+   - `/robots.txt` shows `Allow: /` and a `Sitemap:` line.
+   - `/sitemap.xml` lists real URLs and no demo products.
+   - The page source contains `<meta name="robots" content="index, follow">`.
+   - `curl -I https://forgeline.live/` returns no `X-Robots-Tag` header.
+6. Submit `https://forgeline.live/sitemap.xml` in Google Search Console.
+
+To turn indexing off again, remove the variable (or set it to anything other than `true`) and redeploy.
 
 ## Deployment
 

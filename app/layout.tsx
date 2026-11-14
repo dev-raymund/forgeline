@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { robotsDirectives } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  // Global indexing switch (lib/seo.ts): "noindex, nofollow" unless enabled.
+  robots: robotsDirectives(),
   openGraph: {
     type: "website",
     siteName: site.name,

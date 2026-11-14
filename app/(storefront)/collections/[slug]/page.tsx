@@ -15,6 +15,7 @@ import {
 } from "@/lib/catalog";
 import { formatCount } from "@/lib/format";
 import { pageMetadata } from "@/lib/metadata";
+import { isIndexableProduct } from "@/lib/seo";
 
 /**
  * Collection pages must be fully static. This also makes the first request
@@ -34,10 +35,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const collection = await getCollection(slug);
   if (!collection) return {};
+  const products = await getProducts({ category: collection.slug });
   return pageMetadata({
     title: collection.name,
     description: `${collection.summary} ${collection.description}`,
     path: `/collections/${collection.slug}`,
+    // Matches the sitemap: collections with only demo products stay noindex.
+    noIndex: !products.some(isIndexableProduct),
   });
 }
 
