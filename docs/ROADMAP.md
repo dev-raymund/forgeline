@@ -4,7 +4,7 @@ Single-business international store for curated everyday essentials.
 Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 
 **Last updated:** 2026-11-14
-**Working branch:** `phase-1/storefront-foundation` (the latest commit is in the session log and `git log`)
+**Working branch:** `phase-1/storefront-foundation` (the latest commit is in the session log and `git log`). A visual redesign is parked on `design/shadow-board`.
 
 ## Status at a glance
 
@@ -12,7 +12,8 @@ Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 | --- | --- | --- |
 | Foundation (done) | Storefront pages, client cart, typed demo catalog, SEO and indexing switch, visual redesign | Done |
 | A | Finish the visual storefront (editorial photography) | Done |
-| B | Business decisions: market, supplier, products, margins | In progress: items 1–2 delivered for owner review |
+| Design pass | "The Shadow Board" redesign | Parked on `design/shadow-board` at the owner's request; not merged |
+| B | Business decisions: market, supplier, products, margins | In progress: items 1–3 delivered for owner review |
 | C | Real catalog | Not started (needs B) |
 | D | Commerce backend (hosted checkout, orders, webhooks, email) | Not started (needs B, C) |
 | E | Policies and trust pages | Not started (needs B, D) |
@@ -59,7 +60,7 @@ Delivery order (each reviewed by the owner before the next starts):
 
 1. [x] Market comparison (US, UK, AU): delivered for review
 2. [x] Payment feasibility for a Philippines-based business: delivered for review
-3. [ ] Supplier comparison, inquiry template, sample-inspection checklist
+3. [x] Supplier comparison, inquiry template, sample-inspection checklist: delivered for review
 4. [ ] Product candidates (20–30) with compliance flags and a shortlist rubric
 5. [ ] Margin model (per product, per market)
 6. [x] Decision log created (all decisions open)
@@ -132,3 +133,5 @@ Merging or pushing to `main` · changing the Vercel production branch or domains
 | 2026-11-14 | Phase A: editorial images | 5 of 7 images inspected, exported and wired in; Gear and Brand rejected and awaiting replacements (`88d1aba`) |
 | 2026-11-14 | Phase A: completion | Gear (crop plus retouch) and Brand (retouch) approved and wired in; all editorial slots filled; Phase A done (`e531d94`) |
 | 2026-11-15 | Phase B: items 1–2 | Market comparison and payment feasibility delivered privately for owner review; decision log created |
+| 2026-11-15 | Design pass | Three directions mocked up; "The Shadow Board" built on `design/shadow-board` (`0fdef7d`), then parked by the owner |
+| 2026-11-15 | Phase B: item 3 | Supplier comparison (TeemDrop, CJdropshipping, HyperSKU; Zendrop and Spocket excluded), inquiry email and sample checklist delivered privately |
