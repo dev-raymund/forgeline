@@ -13,7 +13,7 @@ Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 | Foundation (done) | Storefront pages, client cart, typed demo catalog, SEO and indexing switch, visual redesign | Done |
 | A | Finish the visual storefront (editorial photography) | Done |
 | Design pass | "The Shadow Board" redesign | Parked on `design/shadow-board` at the owner's request; not merged |
-| B | Business decisions: market, supplier, products, margins | In progress: items 1–3 delivered; supplier inquiries sent 2026-11-17; TeemDrop answered in part and a follow-up was sent; CJdropshipping and HyperSKU pending |
+| B | Business decisions: market, supplier, products, margins | In progress: items 1–3 delivered; supplier inquiries sent 2026-11-17; TeemDrop has replied twice in part, and its contracting company is still unconfirmed; CJdropshipping and HyperSKU pending |
 | C | Real catalog | Not started (needs B) |
 | D | Commerce backend (hosted checkout, orders, webhooks, email) | Not started (needs B, C) |
 | E | Policies and trust pages | Not started (needs B, D) |
@@ -140,3 +140,4 @@ Merging or pushing to `main` · changing the Vercel production branch or domains
 | 2026-11-17 | Phase B: supplier outreach | The connector still failed after reconnecting, so the agent opened prefilled Gmail compose windows and the owner sent two inquiries (CJdropshipping, HyperSKU) |
 | 2026-11-17 | Phase B: supplier outreach | Once Gmail was back, the agent found the TeemDrop inquiry had never gone out and sent it. Private workspace synced to the owner's Google Drive |
 | 2026-11-17 | Phase B: supplier outreach | TeemDrop replied in part, with several details left for an account agent; recorded privately. A follow-up with the open points was sent with the owner's approval; registration waits until the contracting company is confirmed |
+| 2026-11-17 | Phase B: supplier outreach | TeemDrop's second reply answered more points but not the contracting company. The agent found TeemDrop's own documents name two different companies, checked the UK one on Companies House, and, with the owner's approval, sent the screenshots TeemDrop asked for. Registration stays on hold; recorded privately and synced to Drive |
