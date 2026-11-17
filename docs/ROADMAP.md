@@ -70,7 +70,7 @@ Original scope:
 
 - [ ] Target market priority: US, UK, Australia
 - [ ] Supplier selection. TeemDrop was researched but not chosen. Open questions: contracting legal entity, shipping-time discrepancies, per-destination costs, quality inspection, returns, branding and minimum order costs, fees, official API
-- [ ] Order and inspect samples before any product is listed
+- [ ] Order and inspect samples before any product is listed (on hold: samples cost money, which the owner's no-upfront-spend rule excludes; options recorded privately)
 - [ ] Product research: 20–30 candidates, narrowed to 8–12 (about 2–3 per collection)
 - [ ] Margin model per product: product cost, shipping, duties, payment fees, acquisition cost, refunds, chargebacks, operating costs
 - [ ] Deliverables: comparison sheets and checklists (no decisions made by the agent)
@@ -108,6 +108,7 @@ Status: **Not started.**
 - [ ] Accessibility, performance and mobile checks
 - [ ] Error monitoring and privacy-respecting analytics
 - [ ] Final content pass: no placeholder copy, no demo products
+- [ ] Hosting plan decision: Vercel's Terms of Service allow the free Hobby plan for personal or non-commercial use only, so a live store needs a decision before launch (owner)
 - [ ] Launch sequence, each step approved by the owner: merge to `main` → confirm production domain → set `INDEXING_ENABLED=true` → redeploy → verify robots.txt and sitemap
 
 ## Phase G: After launch
@@ -125,6 +126,8 @@ Status: **Not started.**
 
 Merging or pushing to `main` · changing the Vercel production branch or domains · changing Hostinger DNS · enabling indexing · adding paid services or dependencies with a cost · anything that spends money.
 
+Owner's rule (2026-11-17): no money is paid up front. Costs are covered only by money customers have already paid.
+
 ## Session log
 
 | Date | Session | Result |
@@ -141,3 +144,4 @@ Merging or pushing to `main` · changing the Vercel production branch or domains
 | 2026-11-17 | Phase B: supplier outreach | Once Gmail was back, the agent found the TeemDrop inquiry had never gone out and sent it. Private workspace synced to the owner's Google Drive |
 | 2026-11-17 | Phase B: supplier outreach | TeemDrop replied in part, with several details left for an account agent; recorded privately. A follow-up with the open points was sent with the owner's approval; registration waits until the contracting company is confirmed |
 | 2026-11-17 | Phase B: supplier outreach | TeemDrop's second reply answered more points but not the contracting company. The agent found TeemDrop's own documents name two different companies, checked the UK one on Companies House, and, with the owner's approval, sent the screenshots TeemDrop asked for. Registration stays on hold; recorded privately and synced to Drive |
+| 2026-11-17 | Phase B: constraints | Owner set a no-upfront-spend rule. Recorded privately with what it affects (samples, order payment timing, refunds, hosting plan at launch); the samples step is on hold and a hosting decision was added to Phase F |
