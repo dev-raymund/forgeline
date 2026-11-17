@@ -13,7 +13,7 @@ Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 | Foundation (done) | Storefront pages, client cart, typed demo catalog, SEO and indexing switch, visual redesign | Done |
 | A | Finish the visual storefront (editorial photography) | Done |
 | Design pass | "The Shadow Board" redesign | Parked on `design/shadow-board` at the owner's request; not merged |
-| B | Business decisions: market, supplier, products, margins | In progress: items 1–3 delivered; supplier outreach prepared, sending waits on the Gmail connector |
+| B | Business decisions: market, supplier, products, margins | In progress: items 1–3 delivered; supplier inquiries sent 2026-11-17, waiting for replies |
 | C | Real catalog | Not started (needs B) |
 | D | Commerce backend (hosted checkout, orders, webhooks, email) | Not started (needs B, C) |
 | E | Policies and trust pages | Not started (needs B, D) |
@@ -64,7 +64,7 @@ Delivery order (each reviewed by the owner before the next starts):
 4. [ ] Product candidates (20–30) with compliance flags and a shortlist rubric
 5. [ ] Margin model (per product, per market)
 6. [x] Decision log created (all decisions open)
-7. [ ] Supplier outreach (owner asked the agent to run it, 2026-11-17): official contact addresses confirmed and the emails finalised privately. Sending is blocked until Gmail is reconnected. Accounts, sample orders and anything that spends money still need owner approval.
+7. [ ] Supplier outreach (owner asked the agent to run it, 2026-11-17): official contact addresses confirmed; the owner sent the three inquiry emails on 2026-11-17. Waiting for replies; follow-up due 2026-11-20 if there are none. Accounts, sample orders and anything that spends money still need owner approval.
 
 Original scope:
 
@@ -137,3 +137,4 @@ Merging or pushing to `main` · changing the Vercel production branch or domains
 | 2026-11-15 | Design pass | Three directions mocked up; "The Shadow Board" built on `design/shadow-board` (`0fdef7d`), then parked by the owner |
 | 2026-11-15 | Phase B: item 3 | Supplier comparison (TeemDrop, CJdropshipping, HyperSKU; Zendrop and Spocket excluded), inquiry email and sample checklist delivered privately |
 | 2026-11-17 | Phase B: supplier outreach | Official contact addresses confirmed on each supplier's site; three final emails and a contact log prepared privately. Not sent: the Gmail and Google Drive connectors had expired sessions |
+| 2026-11-17 | Phase B: supplier outreach | The connector still failed after reconnecting, so the agent opened prefilled Gmail compose windows and the owner sent all three inquiries |
