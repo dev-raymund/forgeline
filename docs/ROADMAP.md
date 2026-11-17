@@ -64,7 +64,7 @@ Delivery order (each reviewed by the owner before the next starts):
 4. [ ] Product candidates (20–30) with compliance flags and a shortlist rubric
 5. [ ] Margin model (per product, per market)
 6. [x] Decision log created (all decisions open)
-7. [ ] Supplier outreach (owner asked the agent to run it, 2026-11-17): official contact addresses confirmed; the owner sent the three inquiry emails on 2026-11-17. Waiting for replies; follow-up due 2026-11-20 if there are none. Accounts, sample orders and anything that spends money still need owner approval.
+7. [ ] Supplier outreach (owner asked the agent to run it, 2026-11-17): official contact addresses confirmed; all three inquiry emails sent on 2026-11-17 (two by the owner, one by the agent through Gmail). Waiting for replies; follow-up due 2026-11-20 if there are none. Accounts, sample orders and anything that spends money still need owner approval.
 
 Original scope:
 
@@ -137,4 +137,5 @@ Merging or pushing to `main` · changing the Vercel production branch or domains
 | 2026-11-15 | Design pass | Three directions mocked up; "The Shadow Board" built on `design/shadow-board` (`0fdef7d`), then parked by the owner |
 | 2026-11-15 | Phase B: item 3 | Supplier comparison (TeemDrop, CJdropshipping, HyperSKU; Zendrop and Spocket excluded), inquiry email and sample checklist delivered privately |
 | 2026-11-17 | Phase B: supplier outreach | Official contact addresses confirmed on each supplier's site; three final emails and a contact log prepared privately. Not sent: the Gmail and Google Drive connectors had expired sessions |
-| 2026-11-17 | Phase B: supplier outreach | The connector still failed after reconnecting, so the agent opened prefilled Gmail compose windows and the owner sent all three inquiries |
+| 2026-11-17 | Phase B: supplier outreach | The connector still failed after reconnecting, so the agent opened prefilled Gmail compose windows and the owner sent two inquiries (CJdropshipping, HyperSKU) |
+| 2026-11-17 | Phase B: supplier outreach | Once Gmail was back, the agent found the TeemDrop inquiry had never gone out and sent it. Private workspace synced to the owner's Google Drive |
