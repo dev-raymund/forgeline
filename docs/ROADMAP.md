@@ -13,7 +13,7 @@ Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Vercel.
 | Foundation (done) | Storefront pages, client cart, typed demo catalog, SEO and indexing switch, visual redesign | Done |
 | A | Finish the visual storefront (editorial photography) | Done |
 | Design pass | "The Shadow Board" redesign | Parked on `design/shadow-board` at the owner's request; not merged |
-| B | Business decisions: market, supplier, products, margins | In progress: items 1–3 delivered; supplier inquiries sent 2026-11-17; TeemDrop and CJdropshipping have replied (neither has confirmed its contracting company); HyperSKU pending; item 4 in progress |
+| B | Business decisions: market, supplier, products, margins | In progress: items 1–3 delivered; supplier inquiries sent 2026-11-17; TeemDrop and CJdropshipping have replied (TeemDrop has confirmed its contracting company in writing; CJdropshipping hasn't); HyperSKU pending; item 4 in progress |
 | C | Real catalog | Not started (needs B) |
 | D | Commerce backend (hosted checkout, orders, webhooks, email) | Not started (needs B, C) |
 | E | Policies and trust pages | Not started (needs B, D) |
@@ -151,3 +151,4 @@ Owner's rule (2026-11-17): no money is paid up front. Costs are covered only by 
 | 2026-11-18 | Phase B: item 4 | The owner created free CJdropshipping and TeemDrop accounts (no payment). With CJ signed in, 24 product pages were read for weight, stock and shipping quotes to the US, UK and Australia, using only methods covered by CJ's dispute policy. Candidates now 26. Drafts of the company questions for each supplier are on the owner's private page |
 | 2026-11-18 | Phase B: supplier outreach and item 4 | With the owner's approval, the company question went to CJdropshipping as an account ticket and to TeemDrop's support team (its listed account manager) by email. The 26 candidates are also on a private live page for the owner |
 | 2026-11-18 | Phase B: supplier outreach | TeemDrop support forwarded the contracting-company question to its departments and assigned an account agent. With the owner's approval, the question also went to the agent's company address; her contact details are inconsistent, so only company channels are used. No CJ ticket answer or HyperSKU reply yet. Recorded privately |
+| 2026-11-19 | Phase B: supplier outreach | TeemDrop's support team and account agent both confirmed its contracting company in writing. Governing law and who receives payment are still unanswered; with the owner's approval, a follow-up went to the agent's company address. A check of the company in its official register waits for the browser. No CJ ticket answer or HyperSKU reply yet. Recorded privately |
