@@ -15,7 +15,8 @@
  * Contrast notes (WCAG 2.2):
  * - ink on grey 12.4:1, muted on grey 6.0:1 (5.3:1 on sunken)
  * - accent-ink on grey 4.7:1, on surface 5.5:1 (not for text on sunken)
- * - ink on orange 4.75:1 (accent fills use ink text, never white)
+ * - white on accent-fill 4.7:1 (orange buttons); the brighter brand orange
+ *   is for dots and marks only (white on it is 3.8:1)
  * - line-strong on grey 3.1:1 (interactive borders)
  */
 
@@ -42,6 +43,8 @@
   /* Semantic: accent (use sparingly) */
   --color-accent: var(--color-orange); /* Fills, markers, large text. */
   --color-accent-ink: #9c3a20; /* Small accent text on grey or surface. */
+  --color-accent-fill: #c44d2c; /* Button fills with white text (4.7:1). */
+  --color-accent-fill-hover: #b5462a;
 
   /* Semantic: inverse (ink) surfaces */
   --color-inverse: var(--color-charcoal);

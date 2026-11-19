@@ -13,9 +13,9 @@ const base =
 const variants: Record<Variant, string> = {
   // Ink pill on light surfaces.
   primary: "border border-foreground bg-foreground text-cream hover:bg-foreground/88",
-  // Ink pill with an orange hover. Orange is kept off button fills: white
-  // text on it fails contrast and ink text read as off-brand.
-  accent: "border border-foreground bg-foreground text-cream hover:border-accent-ink hover:bg-accent-ink",
+  // Orange pill with white text, on a slightly deeper orange so white text
+  // passes WCAG AA (4.7:1). Use for the one key action.
+  accent: "border border-accent-fill bg-accent-fill text-white hover:border-accent-fill-hover hover:bg-accent-fill-hover",
   // Quiet outline pill on light surfaces.
   secondary:
     "border border-line-strong text-foreground hover:border-foreground",

@@ -32,7 +32,7 @@ export function CartLink() {
         aria-hidden="true"
         className={cn(
           "inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 font-mono text-[0.6875rem] tabular-nums",
-          showCount ? "bg-foreground text-cream" : "invisible",
+          showCount ? "bg-accent-fill text-white" : "invisible",
         )}
       >
         {showCount ? count : 0}

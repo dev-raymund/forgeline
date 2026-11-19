@@ -47,7 +47,7 @@ export function AddToCart({
                   }}
                   className="peer sr-only"
                 />
-                <span className="inline-flex h-10 min-w-12 items-center justify-center rounded-md border border-line-strong px-4 text-sm transition-colors hover:border-foreground peer-checked:border-foreground peer-checked:bg-foreground peer-checked:text-background peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-foreground">
+                <span className="inline-flex h-10 min-w-12 items-center justify-center rounded-full border border-line-strong px-4 text-sm transition-colors hover:border-foreground peer-checked:border-foreground peer-checked:bg-foreground peer-checked:text-cream peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-foreground">
                   {variant.name}
                 </span>
               </label>
@@ -58,6 +58,7 @@ export function AddToCart({
 
       <div>
         <Button
+          variant="accent"
           size="lg"
           className="w-full sm:w-auto sm:min-w-64"
           onClick={() => {

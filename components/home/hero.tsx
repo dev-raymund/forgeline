@@ -30,7 +30,7 @@ export function Hero({ collections }: { collections: readonly Collection[] }) {
               in between.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-              <ButtonLink href="/shop" size="lg">
+              <ButtonLink href="/shop" variant="accent" size="lg">
                 Shop now
                 <Arrow />
               </ButtonLink>
