@@ -29,7 +29,7 @@ export function Values() {
           </div>
           <ol className="grid gap-8 sm:grid-cols-3 sm:gap-6 lg:col-span-8 lg:gap-10">
             {principles.map((principle, index) => (
-              <li key={principle.title} className="border-t border-line-strong pt-5">
+              <li key={principle.title} data-reveal className="border-t border-line-strong pt-5">
                 <span
                   aria-hidden="true"
                   className="block text-6xl font-bold leading-none tracking-tight text-transparent [-webkit-text-stroke:1px_var(--color-foreground)] md:text-7xl"

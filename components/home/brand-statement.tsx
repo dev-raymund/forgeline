@@ -8,7 +8,7 @@ export function BrandStatement() {
   return (
     <section aria-labelledby="brand-title" className="bg-surface">
       <Container className="grid items-center gap-8 py-section md:grid-cols-12 md:gap-10 lg:gap-16">
-        <div className="md:order-2 md:col-span-7">
+        <div data-reveal className="md:order-2 md:col-span-7">
           <Eyebrow className="mb-5">Our approach</Eyebrow>
           <h2 id="brand-title" className="text-headline font-light">
             Less clutter.

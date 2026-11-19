@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Footer } from "./footer";
 import { Header } from "./header";
+import { Motion } from "./motion";
 
 /**
  * Shared page frame: skip link, preview notice, header, main region, footer.
@@ -28,6 +29,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         {children}
       </main>
       <Footer />
+      <Motion />
     </>
   );
 }

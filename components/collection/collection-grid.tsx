@@ -44,7 +44,7 @@ export async function CollectionGrid({
         const slot = layout[index % layout.length];
         const sideBySide = slot.row !== "";
         return (
-          <li key={collection.slug} className={cn("lg:col-span-1", slot.item)}>
+          <li key={collection.slug} data-reveal className={cn("lg:col-span-1", slot.item)}>
             <Link
               href={`/collections/${collection.slug}`}
               className={cn("group block", slot.row)}

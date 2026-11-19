@@ -30,7 +30,7 @@ export async function ProductGrid({
       )}
     >
       {products.map((product) => (
-        <li key={product.id}>
+        <li key={product.id} data-reveal>
           <ProductCard
             product={product}
             collectionName={names.get(product.category) ?? ""}

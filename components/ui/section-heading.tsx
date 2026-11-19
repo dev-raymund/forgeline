@@ -25,7 +25,7 @@ export function SectionHeading({
   ghost?: string;
 }) {
   return (
-    <div className="relative mb-9 md:mb-14">
+    <div data-reveal className="relative mb-9 md:mb-14">
       {ghost && <GhostWord className="-top-2 md:-top-6 lg:-top-10">{ghost}</GhostWord>}
       <div className="relative z-10 grid gap-4 pt-10 md:pt-16 lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-start lg:pt-24">
         {eyebrow ? <Eyebrow className="lg:pt-4">{eyebrow}</Eyebrow> : <span />}
