@@ -5,28 +5,30 @@ import { cn } from "@/lib/cn";
 type Variant = "primary" | "accent" | "secondary" | "inverse" | "ghost-inverse";
 type Size = "sm" | "md" | "lg";
 
+// Pill buttons in sentence case; a small lift on hover (motion is removed
+// under prefers-reduced-motion by the global rule in globals.css).
 const base =
-  "inline-flex items-center justify-center gap-2.5 rounded-sm font-semibold uppercase tracking-label transition-colors disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-[transform,background-color,border-color,color] hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  // Charcoal on light surfaces.
-  primary: "bg-foreground text-background hover:bg-foreground/88",
-  // Burnt orange with charcoal text (4.7:1). Use for the one key action.
-  accent: "bg-accent text-foreground hover:bg-accent/88",
-  // Outline on light surfaces.
+  // Ink pill on light surfaces.
+  primary: "border border-foreground bg-foreground text-cream hover:bg-foreground/88",
+  // Orange with ink text (4.75:1). Use for the one key action.
+  accent: "border border-accent bg-accent text-foreground hover:bg-accent/88",
+  // Quiet outline pill on light surfaces.
   secondary:
-    "border border-foreground text-foreground hover:bg-foreground hover:text-background",
-  // Solid cream on charcoal surfaces.
-  inverse: "bg-on-inverse text-foreground hover:bg-white",
+    "border border-line-strong text-foreground hover:border-foreground",
+  // Light pill on ink surfaces.
+  inverse: "border border-on-inverse bg-on-inverse text-foreground hover:bg-white",
   // Outline on charcoal surfaces.
   "ghost-inverse":
     "border border-on-inverse/60 text-on-inverse hover:border-on-inverse hover:bg-on-inverse hover:text-foreground",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-[0.6875rem]",
-  md: "h-11 px-5 text-xs",
-  lg: "h-12 px-7 text-xs sm:h-13",
+  sm: "min-h-10 px-4 text-sm",
+  md: "min-h-11 px-5 text-[0.9375rem]",
+  lg: "min-h-12 px-7 text-base",
 };
 
 export function buttonStyles({

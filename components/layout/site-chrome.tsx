@@ -16,8 +16,8 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       >
         Skip to content
       </a>
-      <p className="flex items-center justify-center gap-2 bg-inverse px-gutter py-2 text-center font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-on-inverse-muted">
-        <span aria-hidden="true" className="size-1.5 shrink-0 bg-accent" />
+      <p className="flex items-center justify-center gap-2 bg-inverse px-gutter py-2 text-center text-[0.8125rem] font-medium text-on-inverse-muted">
+        <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-accent" />
         <span className="sm:hidden">Preview store · Demo content</span>
         <span className="hidden sm:inline">
           Preview store · Products shown are demo content

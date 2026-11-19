@@ -5,10 +5,11 @@ import { Container } from "@/components/ui/container";
 import { Wordmark } from "@/components/ui/wordmark";
 import { getCollections } from "@/lib/catalog";
 import { companyLinks } from "@/lib/site";
+import { HeaderShell } from "./header-shell";
 import { MobileNav, type CollectionNavItem } from "./mobile-nav";
 
 const quietLink =
-  "text-[0.8125rem] font-medium text-muted transition-colors hover:text-foreground";
+  "text-[0.9375rem] font-medium text-muted transition-colors hover:text-foreground";
 
 export async function Header() {
   const collections = await getCollections();
@@ -20,7 +21,7 @@ export async function Header() {
   }));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-background">
+    <HeaderShell>
       <Container className="relative flex h-16 items-center gap-4 lg:gap-8">
         <Link
           href="/"
@@ -56,6 +57,6 @@ export async function Header() {
           <MobileNav items={items} companyLinks={companyLinks} />
         </div>
       </Container>
-    </header>
+    </HeaderShell>
   );
 }
