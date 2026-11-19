@@ -23,23 +23,25 @@ export default async function HomePage() {
       <Hero collections={collections} />
 
       <section aria-labelledby="collections-title">
-        <Container className="py-section">
+        <Container className="pb-section">
           <SectionHeading
             id="collections-title"
             eyebrow="Five collections"
             title="Shop by collection"
+            ghost="Collections"
             action={{ href: "/collections", label: "All collections" }}
           />
           <CollectionGrid />
         </Container>
       </section>
 
-      <section aria-labelledby="featured-title" className="border-t border-line">
-        <Container className="py-section">
+      <section aria-labelledby="featured-title">
+        <Container className="pb-section">
           <SectionHeading
             id="featured-title"
             eyebrow="Demo selection"
             title="Selected essentials"
+            ghost="Essentials"
             description="A preview of the range. Pricing and final specifications are confirmed as sourcing completes."
             action={{ href: "/shop", label: "Shop all" }}
           />

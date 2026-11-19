@@ -62,18 +62,18 @@ export function MediaFrame({
       ) : (
         <div
           {...(decorative ? { "aria-hidden": true } : { role: "img", "aria-label": alt })}
-          className="absolute inset-0 flex items-center justify-center bg-[repeating-linear-gradient(135deg,transparent_0_14px,rgb(167_166_157/0.12)_14px_15px)]"
+          className="absolute inset-0 flex items-center justify-center bg-tile"
         >
           <svg
             aria-hidden="true"
             viewBox="0 0 32 32"
-            className="size-8 text-stone/70 sm:size-10"
+            className="size-8 text-foreground/15 sm:size-10"
           >
             <rect width="32" height="32" rx="4" fill="currentColor" />
-            <path d="M10 7h13v4h-9v4h7v4h-7v6h-4z" className="fill-sunken" />
+            <path d="M10 7h13v4h-9v4h7v4h-7v6h-4z" className="fill-surface" />
           </svg>
           {label && (
-            <span className="absolute bottom-3 left-3 font-mono text-eyebrow uppercase text-muted">
+            <span className="absolute bottom-3 left-3 text-sm font-medium text-muted">
               {label}
             </span>
           )}

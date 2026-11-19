@@ -13,7 +13,7 @@ const copyrightYear = process.env.FORGELINE_BUILD_YEAR;
 
 const linkClass =
   "text-sm text-on-inverse transition-colors hover:text-accent";
-const headingClass = "font-mono text-eyebrow uppercase text-on-inverse-muted";
+const headingClass = "text-sm font-medium text-on-inverse-muted";
 
 export async function Footer() {
   const collections = await getCollections();
@@ -25,7 +25,7 @@ export async function Footer() {
           <Link href="/" aria-label="Forgeline home" className="inline-block text-lg">
             <Wordmark tone="light" />
           </Link>
-          <p className="mt-8 text-title font-bold uppercase">{site.tagline}</p>
+          <p className="mt-8 text-title font-normal">{site.tagline}</p>
           <p className="mt-2 max-w-sm text-sm text-on-inverse-muted">
             {site.message} Curated essentials across gear, home, tech, active
             and tools.
@@ -87,7 +87,7 @@ export async function Footer() {
           {site.name}. All rights reserved.
         </p>
         <p className="flex items-center gap-2">
-          <span aria-hidden="true" className="size-1.5 bg-accent" />
+          <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-accent" />
           Preview store: products shown are demo content.
         </p>
       </Container>

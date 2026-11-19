@@ -56,9 +56,9 @@ export async function CollectionGrid({
                   decorative
                   sizes={slot.sizes}
                   zoomOnHover
-                  className="aspect-[4/5] rounded-sm"
+                  className="aspect-[4/5] rounded-lg"
                 />
-                <span className="absolute left-2.5 top-2.5 rounded-sm bg-background/92 px-2 py-1 font-mono text-eyebrow text-foreground">
+                <span className="absolute left-3 top-3 rounded-full bg-foreground px-2.5 py-1 font-mono text-xs font-medium text-cream">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -70,15 +70,15 @@ export async function CollectionGrid({
                 )}
               >
                 <div className="flex items-baseline justify-between gap-3">
-                  <Heading className="text-lg font-bold uppercase tracking-tight sm:text-xl">
+                  <Heading className="text-xl font-medium tracking-tight sm:text-2xl">
                     {collection.name}
                   </Heading>
-                  <span className="font-mono text-eyebrow uppercase text-muted">
+                  <span className="text-sm font-medium text-muted">
                     {formatCount(counts[collection.slug], "item")}
                   </span>
                 </div>
                 <p className="mt-1.5 text-sm text-muted">{collection.summary}</p>
-                <span className="mt-3 inline-flex items-center gap-2 border-b border-foreground pb-0.5 text-[0.6875rem] font-semibold uppercase tracking-label">
+                <span className="mt-3 inline-flex items-center gap-2 border-b border-foreground pb-0.5 text-sm font-semibold">
                   Discover
                   <Arrow className="size-3 transition-transform group-hover:translate-x-0.5 group-hover:text-accent-ink" />
                 </span>

@@ -86,7 +86,7 @@ async function CollectionContent({
       <header className="grid gap-6 border-b border-line pb-8 pt-6 md:grid-cols-12 md:items-center md:gap-10 md:pb-12 md:pt-8">
         <div className="md:col-span-7 lg:col-span-6">
           <Eyebrow className="mb-4">{collection.summary}</Eyebrow>
-          <h1 className="text-display font-bold uppercase">{collection.name}</h1>
+          <h1 className="text-display font-light">{collection.name}</h1>
           <p className="mt-5 max-w-prose text-base text-muted md:text-lg">
             {collection.description}
           </p>
@@ -96,10 +96,10 @@ async function CollectionContent({
           image={collection.image}
           alt={`${collection.name} collection`}
           sizes="(min-width: 90rem) 440px, (min-width: 64rem) 33vw, (min-width: 48rem) 40vw, 100vw"
-          className="aspect-[4/3] rounded-sm md:col-span-5 md:aspect-[4/5] lg:col-span-4 lg:col-start-9"
+          className="aspect-[4/3] rounded-lg md:col-span-5 md:aspect-[4/5] lg:col-span-4 lg:col-start-9"
         />
       </header>
-      <h2 className="py-6 font-mono text-eyebrow uppercase text-muted">
+      <h2 className="py-6 text-sm font-medium text-muted">
         {formatCount(products.length, "product")}
       </h2>
       <ProductGrid products={products} />
@@ -110,9 +110,9 @@ async function CollectionContent({
       >
         <h2
           id="other-collections"
-          className="flex items-center gap-2.5 font-mono text-eyebrow uppercase text-muted"
+          className="flex items-center gap-2.5 text-[0.9375rem] font-medium text-muted"
         >
-          <span aria-hidden="true" className="size-1.5 bg-accent" />
+          <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-accent" />
           Other collections
         </h2>
         <ul className="mt-5 flex flex-wrap gap-2">
@@ -120,7 +120,7 @@ async function CollectionContent({
             <li key={other.slug}>
               <Link
                 href={`/collections/${other.slug}`}
-                className="inline-flex h-11 items-center gap-2 rounded-sm border border-line-strong px-4 text-xs font-semibold uppercase tracking-label transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+                className="inline-flex h-11 items-center gap-2 rounded-full border border-line-strong px-4 text-sm font-semibold transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
               >
                 {other.name}
                 <span aria-hidden="true">→</span>

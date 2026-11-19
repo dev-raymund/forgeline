@@ -66,7 +66,7 @@ export function MobileNav({
         aria-expanded={open}
         aria-controls={PANEL_ID}
         onClick={() => setOpen((value) => !value)}
-        className="-mr-2 inline-flex h-11 min-w-11 items-center justify-center gap-2 rounded-sm px-2.5 text-xs font-semibold uppercase tracking-label"
+        className="-mr-2 inline-flex h-11 min-w-11 items-center justify-center gap-2 rounded-sm px-2.5 text-sm font-semibold"
       >
         <span aria-hidden="true" className="relative block h-3 w-[18px]">
           <span
@@ -97,7 +97,7 @@ export function MobileNav({
               <span aria-hidden="true">→</span>
             </Link>
 
-            <p className="mt-7 font-mono text-eyebrow uppercase text-muted">
+            <p className="mt-7 text-sm font-medium text-muted">
               Collections
             </p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -106,7 +106,7 @@ export function MobileNav({
                   <Link
                     href={item.href}
                     onClick={close}
-                    className="flex items-center gap-4 rounded-sm bg-surface p-2 pr-4 transition-colors hover:bg-sunken"
+                    className="flex items-center gap-4 rounded-md bg-surface p-2 pr-4 transition-colors hover:bg-sunken"
                   >
                     {item.image ? (
                       <MediaFrame
@@ -125,7 +125,7 @@ export function MobileNav({
                       </span>
                     )}
                     <span className="min-w-0">
-                      <span className="block text-sm font-bold uppercase tracking-wide">
+                      <span className="block text-lg font-medium">
                         {item.label}
                       </span>
                       <span className="mt-0.5 block truncate text-xs text-muted">

@@ -23,20 +23,20 @@ export function Values() {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <Eyebrow className="mb-5">What we stand for</Eyebrow>
-            <h2 id="values-title" className="text-title font-bold uppercase">
+            <h2 id="values-title" className="text-title font-normal">
               How we choose every product
             </h2>
           </div>
           <ol className="grid gap-8 sm:grid-cols-3 sm:gap-6 lg:col-span-8 lg:gap-10">
             {principles.map((principle, index) => (
-              <li key={principle.title} className="border-t-2 border-foreground pt-5">
+              <li key={principle.title} className="border-t border-line-strong pt-5">
                 <span
                   aria-hidden="true"
-                  className="block font-mono text-4xl font-medium tracking-tight text-accent md:text-5xl"
+                  className="block text-6xl font-bold leading-none tracking-tight text-transparent [-webkit-text-stroke:1px_var(--color-foreground)] md:text-7xl"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-5 text-lg font-bold uppercase tracking-tight">
+                <h3 className="mt-5 text-xl font-medium tracking-tight">
                   {principle.title}
                 </h3>
                 <p className="mt-2 text-sm text-muted">{principle.body}</p>

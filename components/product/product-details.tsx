@@ -50,7 +50,7 @@ export async function ProductDetails({
               name={product.name}
               sizes="(min-width: 90rem) 780px, (min-width: 64rem) 55vw, 100vw"
               preload={Boolean(primaryImage)}
-              className="rounded-sm"
+              className="rounded-lg"
             />
             {product.isDemo && (
               <Badge className="absolute left-3 top-3">Demo product</Badge>
@@ -64,7 +64,7 @@ export async function ProductDetails({
                     image={image}
                     name={product.name}
                     sizes="(min-width: 64rem) 28vw, 50vw"
-                    className="rounded-sm"
+                    className="rounded-md"
                   />
                 </li>
               ))}
@@ -76,12 +76,12 @@ export async function ProductDetails({
           <div className="lg:sticky lg:top-24">
             <Link
               href={`/collections/${product.category}`}
-              className="inline-flex items-center gap-2.5 font-mono text-eyebrow uppercase text-muted transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-2.5 text-sm font-medium text-muted transition-colors hover:text-foreground"
             >
-              <span aria-hidden="true" className="size-1.5 bg-accent" />
+              <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-accent" />
               {collectionName}
             </Link>
-            <h1 className="mt-4 text-title font-bold uppercase md:text-[2.5rem] md:leading-[1.02]">
+            <h1 className="mt-4 text-title font-light md:text-[2.75rem] md:leading-[1.05]">
               {product.name}
             </h1>
             <ProductPrice price={product.price} className="mt-3 text-lg" />
@@ -102,7 +102,7 @@ export async function ProductDetails({
             >
               <h2
                 id="product-details"
-                className="font-mono text-eyebrow uppercase text-foreground"
+                className="text-sm font-medium text-foreground"
               >
                 Details
               </h2>
@@ -120,7 +120,7 @@ export async function ProductDetails({
               >
                 <h2
                   id="product-specifications"
-                  className="font-mono text-eyebrow uppercase text-foreground"
+                  className="text-sm font-medium text-foreground"
                 >
                   Specifications
                 </h2>
@@ -147,7 +147,7 @@ export async function ProductDetails({
             )}
 
             {product.isDemo && (
-              <p className="mt-8 rounded-sm border-l-2 border-accent bg-surface p-4 text-xs leading-relaxed text-muted">
+              <p className="mt-8 rounded-md border-l-2 border-accent bg-surface p-4 text-xs leading-relaxed text-muted">
                 This is a demo product. Its details are illustrative and will
                 be confirmed, or replaced, once sourcing and pricing are
                 complete. It cannot be purchased yet.
@@ -160,10 +160,11 @@ export async function ProductDetails({
       {related.length > 0 && (
         <section
           aria-labelledby="related-products"
-          className="border-t border-line py-section"
+          className="pb-section"
         >
           <SectionHeading
             id="related-products"
+            ghost={collectionName}
             title={`More from ${collectionName}`}
             action={{
               href: `/collections/${product.category}`,

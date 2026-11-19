@@ -3,6 +3,7 @@ import { Arrow, ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { MediaFrame } from "@/components/ui/media-frame";
+import { HeroMosaic } from "./hero-mosaic";
 import type { Collection } from "@/lib/types";
 import { heroImage } from "@/lib/media";
 
@@ -12,12 +13,12 @@ import { heroImage } from "@/lib/media";
  */
 export function Hero({ collections }: { collections: readonly Collection[] }) {
   return (
-    <section aria-labelledby="hero-title" className="border-b border-line">
+    <section aria-labelledby="hero-title">
       <Container className="pb-6 pt-8 md:pb-10 md:pt-12 lg:pt-14">
         <div className="grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-10">
           <div className="lg:col-span-8">
             <Eyebrow className="mb-5 md:mb-7">Premium urban utility</Eyebrow>
-            <h1 id="hero-title" className="text-display font-bold uppercase">
+            <h1 id="hero-title" data-hero-title className="text-display font-light">
               Better finds.
               <br />
               Everyday use<span className="text-accent">.</span>
@@ -29,7 +30,7 @@ export function Hero({ collections }: { collections: readonly Collection[] }) {
               in between.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-              <ButtonLink href="/shop" variant="accent" size="lg">
+              <ButtonLink href="/shop" size="lg">
                 Shop now
                 <Arrow />
               </ButtonLink>
@@ -47,24 +48,32 @@ export function Hero({ collections }: { collections: readonly Collection[] }) {
             2:1 master. Phones crop to 4:3 and tablets to 16:10; the focal
             point keeps the backpack, bottle, mug and notebook in frame.
           */}
+          {heroImage && (
+            <div className="hidden lg:block">
+              <HeroMosaic
+                image={heroImage}
+                sizes="(min-width: 90rem) 1344px, 100vw"
+                preload
+              />
+            </div>
+          )}
           <MediaFrame
             image={heroImage}
             alt="Everyday essentials arranged in a sunlit urban interior"
             sizes="(min-width: 90rem) 1344px, 100vw"
-            preload
-            imageClassName="object-[34%_50%] sm:object-[40%_50%] lg:object-center"
-            className="aspect-[4/3] rounded-sm sm:aspect-[16/10] lg:aspect-[2/1]"
+            imageClassName="object-[34%_50%] sm:object-[40%_50%]"
+            className="aspect-[4/3] rounded-lg sm:aspect-[16/10] lg:hidden"
           />
           <nav
             aria-label="Shop by collection"
-            className="mt-3 sm:absolute sm:bottom-4 sm:left-4 sm:mt-0 lg:bottom-6 lg:left-6"
+            className="mt-3 sm:absolute sm:bottom-4 sm:left-4 sm:mt-0 lg:bottom-[9%] lg:left-[1.5%] lg:z-10"
           >
             <ul className="flex flex-wrap gap-1.5">
               {collections.map((collection) => (
                 <li key={collection.slug}>
                   <Link
                     href={`/collections/${collection.slug}`}
-                    className="group inline-flex h-10 items-center gap-1.5 rounded-sm border border-line bg-surface px-3 text-[0.6875rem] font-semibold uppercase tracking-label transition-colors hover:border-foreground hover:bg-foreground hover:text-background sm:h-9 sm:border-transparent sm:bg-background/92 sm:backdrop-blur-sm"
+                    className="group inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-4 text-sm font-semibold transition-colors hover:border-foreground hover:bg-foreground hover:text-background sm:h-9 sm:border-transparent sm:bg-background/92 sm:backdrop-blur-sm"
                   >
                     {collection.name}
                     <Arrow className="size-3 opacity-60 transition-transform group-hover:translate-x-0.5" />

@@ -12,7 +12,7 @@ export async function ProductGrid({
 }) {
   if (products.length === 0) {
     return (
-      <p className="rounded-sm border border-line bg-surface px-6 py-12 text-center text-sm text-muted">
+      <p className="rounded-lg border border-line bg-surface px-6 py-12 text-center text-sm text-muted">
         No products are available here yet.
       </p>
     );

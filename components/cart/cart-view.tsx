@@ -111,7 +111,7 @@ export function CartView({
                   </Link>
                   <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row sm:justify-between">
                     <div className="min-w-0">
-                      <p className="font-mono text-eyebrow uppercase text-muted">
+                      <p className="text-sm font-medium text-muted">
                         {product.collectionName}
                       </p>
                       <Link

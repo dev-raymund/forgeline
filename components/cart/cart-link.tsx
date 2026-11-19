@@ -13,7 +13,7 @@ export function CartLink() {
     <Link
       href="/cart"
       aria-label={showCount ? `Cart, ${count} ${count === 1 ? "item" : "items"}` : "Cart"}
-      className="inline-flex h-11 items-center gap-2 rounded-sm px-2 text-xs font-semibold uppercase tracking-label"
+      className="inline-flex h-11 items-center gap-2 rounded-sm px-2 text-sm font-semibold"
     >
       <svg
         aria-hidden="true"
@@ -32,7 +32,7 @@ export function CartLink() {
         aria-hidden="true"
         className={cn(
           "inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 font-mono text-[0.6875rem] tabular-nums",
-          showCount ? "bg-accent text-foreground" : "invisible",
+          showCount ? "bg-foreground text-cream" : "invisible",
         )}
       >
         {showCount ? count : 0}

@@ -27,16 +27,16 @@ export function ProductCard({
           sizes={productGridSizes}
           decorative
           zoomOnHover
-          className="rounded-sm"
+          className="rounded-lg"
         />
         {product.isDemo && (
-          <span className="absolute left-2.5 top-2.5 rounded-sm bg-background/92 px-2 py-1 font-mono text-eyebrow uppercase text-foreground">
+          <span className="absolute left-3 top-3 rounded-full bg-foreground px-2.5 py-1 text-xs font-bold text-cream">
             Demo
           </span>
         )}
       </div>
       <div className="mt-3.5 flex flex-1 flex-col">
-        <p className="font-mono text-eyebrow uppercase text-muted">
+        <p className="text-sm font-medium text-muted">
           {collectionName}
         </p>
         <h3 className="mt-1.5 text-[0.9375rem] font-semibold leading-snug">
@@ -50,7 +50,7 @@ export function ProductCard({
         <ProductPrice price={product.price} className="mt-1 text-sm" />
         <span
           aria-hidden="true"
-          className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[0.6875rem] font-semibold uppercase tracking-label text-foreground"
+          className="mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-semibold text-foreground"
         >
           View details
           <Arrow className="size-3 transition-transform group-hover:translate-x-0.5 group-hover:text-accent-ink" />

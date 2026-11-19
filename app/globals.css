@@ -56,9 +56,9 @@
   --text-headline: clamp(2rem, 1.2rem + 3vw, 3.5rem);
   --text-headline--line-height: 1.08;
   --text-headline--letter-spacing: -0.03em;
-  --text-ghost: clamp(6rem, 20vw, 18rem);
-  --text-ghost--line-height: 1;
-  --text-ghost--letter-spacing: -0.045em;
+  --text-giant: clamp(6rem, 20vw, 18rem);
+  --text-giant--line-height: 1;
+  --text-giant--letter-spacing: -0.045em;
   --text-title: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
   --text-title--line-height: 1.1;
   --text-title--letter-spacing: -0.02em;
@@ -134,6 +134,8 @@
     font-size: 1.0625rem;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    /* Ghost words run off the right edge; clip (not hidden) keeps sticky working. */
+    overflow-x: clip;
   }
 
   h1,

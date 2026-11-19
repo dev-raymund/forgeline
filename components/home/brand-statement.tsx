@@ -10,7 +10,7 @@ export function BrandStatement() {
       <Container className="grid items-center gap-8 py-section md:grid-cols-12 md:gap-10 lg:gap-16">
         <div className="md:order-2 md:col-span-7">
           <Eyebrow className="mb-5">Our approach</Eyebrow>
-          <h2 id="brand-title" className="text-headline font-bold uppercase">
+          <h2 id="brand-title" className="text-headline font-light">
             Less clutter.
             <br />
             Better choices.
@@ -29,7 +29,7 @@ export function BrandStatement() {
             image={brandImage}
             alt="A calm, uncluttered shelf with a few well-chosen essentials"
             sizes="(min-width: 90rem) 560px, (min-width: 48rem) 42vw, 100vw"
-            className="aspect-[4/3] rounded-sm"
+            className="aspect-[4/3] rounded-lg"
           />
         </div>
       </Container>
