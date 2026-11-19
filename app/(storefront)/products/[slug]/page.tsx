@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container";
 import { ProductDetailSkeleton } from "@/components/ui/skeleton";
 import { getProduct, getProductSlugs } from "@/lib/catalog";
 import { pageMetadata } from "@/lib/metadata";
+import { isIndexableProduct } from "@/lib/seo";
 
 /**
  * Product pages must be fully static. This also makes the first request for
@@ -28,6 +29,8 @@ export async function generateMetadata({
     title: product.name,
     description: product.shortDescription,
     path: `/products/${product.slug}`,
+    // Demo products are never indexed, even after indexing is enabled.
+    noIndex: !isIndexableProduct(product),
   });
 }
 

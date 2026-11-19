@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Urbanist } from "next/font/google";
+import { robotsDirectives } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Variable font: all weights (300 light headlines to 700) from one file.
+const urbanist = Urbanist({
+  variable: "--font-urbanist",
   subsets: ["latin"],
   display: "swap",
 });
@@ -25,6 +27,8 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  // Global indexing switch (lib/seo.ts): "noindex, nofollow" unless enabled.
+  robots: robotsDirectives(),
   openGraph: {
     type: "website",
     siteName: site.name,
@@ -33,16 +37,14 @@ export const metadata: Metadata = {
     title: `${site.name} | ${site.tagline}`,
     description: site.description,
   },
-  twitter: {
-    card: "summary",
-    title: `${site.name} | ${site.tagline}`,
-    description: site.description,
-  },
+  // No twitter title/description here: child pages would inherit them.
+  // X falls back to each page's og:title, og:description and og:image.
+  twitter: { card: "summary_large_image" },
   formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#d2d5dc",
   colorScheme: "light",
 };
 
@@ -50,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${urbanist.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>

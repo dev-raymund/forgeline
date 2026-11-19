@@ -38,6 +38,8 @@ export interface Collection {
   readonly summary: string;
   /** Longer introduction used on the collection page. */
   readonly description: string;
+  /** Category photography for collection cards and headers. */
+  readonly image?: ProductImage;
 }
 
 export interface ProductImage {
@@ -47,6 +49,8 @@ export interface ProductImage {
   /** Intrinsic dimensions, used to reserve space and prevent layout shift. */
   readonly width: number;
   readonly height: number;
+  /** CSS object-position used when a slot crops the image, e.g. "50% 60%". */
+  readonly position?: string;
 }
 
 export interface ProductVariant {
